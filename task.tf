@@ -12,11 +12,7 @@ resource "aws_ecs_task_definition" "task" {
         },
         {
           name = "SPRING_DATASOURCE_URL"
-          # value = "jdbc:postgresql://${var.databaseEndpoint}/${var.projectName}"
-          # Consulta endpoint na AWS
-          # value = "jdbc:postgresql://${data.aws_db_instance.database.endpoint}/${var.projectName}"
-          # value = "jdbc:postgresql://${aws_db_instance.rds.endpoint}/${aws_db_instance.rds.db_name}"
-          value = "jdbc:postgresql://rds-bluesburguer.cvuiykqc6ts9.us-east-1.rds.amazonaws.com:5432/${var.projectName}"
+          value = "jdbc:mysql://rds-bluesburguer.cvuiykqc6ts9.us-east-1.rds.amazonaws.com:3306/${var.projectName}"
         },
         {
           name  = "SPRING_DATASOURCE_USERNAME"

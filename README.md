@@ -17,3 +17,6 @@ Atualizando a Role-Policy:
 
 Anexando a role com a policy "AdministratorAccess"
 > aws iam attach-role-policy --role-name OrderingSystemServiceRoleForECS --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
+
+Listando as policies anexadas a role:
+> aws iam list-attached-role-policies --role-name OrderingSystemServiceRoleForECS
