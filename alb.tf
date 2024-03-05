@@ -10,7 +10,7 @@ resource "aws_lb" "alb" {
 
 resource "aws_lb_listener" "alb-listener-redirect" {
   load_balancer_arn = aws_lb.alb.arn
-  port              = "9000"
+  port              = "8080"
   protocol          = "HTTP"
 
   default_action {

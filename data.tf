@@ -2,7 +2,7 @@
 #   db_instance_identifier = "rds-${var.projectName}"
 # }
 
-# data "aws_ecr_image" "sonar_image" {
-#   repository_name = var.projectName
-#   image_tag       = "latest"
+# data "aws_iam_role" "ecs_task_execution_role" {
+# name = "ecsTaskExecutionRole"
+# arn = "arn:aws:iam::${var.AWSAccount}:role/ecsTaskExecutionRole"
 # }
