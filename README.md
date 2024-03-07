@@ -20,3 +20,11 @@ Anexando a role com a policy "AdministratorAccess"
 
 Listando as policies anexadas a role:
 > aws iam list-attached-role-policies --role-name OrderingSystemServiceRoleForECS
+
+
+# Comandos úteis:
+> aws rds delete-db-subnet-group --db-subnet-group-name bluesburger
+
+> aws elbv2 describe-target-groups --names TG-bluesburger
+
+> aws elbv2 delete-target-group --target-group-arn arn:aws:elasticloadbalancing:us-east-1:637423186279:targetgroup/TG-bluesburger/082be5af6cb12ba0

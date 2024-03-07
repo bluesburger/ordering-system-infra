@@ -7,7 +7,7 @@ resource "aws_lb_target_group" "tg" {
   vpc_id = var.vpcId
 
   health_check {
-    path    = "/"
+    path    = "/swagger-ui/"
     port    = 8080
     matcher = "200,301"
   }

@@ -1,5 +1,5 @@
 variable "projectName" {
-  default = "bluesburger"
+  default = "bluesburguer"
 }
 
 variable "clusterName" {
@@ -23,7 +23,7 @@ variable "vpcId" {
 }
 
 variable "vpcCIDR" {
-  default = "172.31.0.0/16"
+  default = "172.31.0.0/20"
 }
 
 variable "rdsUser" {
