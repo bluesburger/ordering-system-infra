@@ -11,7 +11,7 @@ resource "aws_ecs_task_definition" "task" {
           value = "dev"
         },
         {
-          name = "SPRING_DATASOURCE_URL"
+          name  = "SPRING_DATASOURCE_URL"
           value = "jdbc:mysql://rds-bluesburguer.cvuiykqc6ts9.us-east-1.rds.amazonaws.com:3306/${var.projectName}"
         },
         {
