@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "repository" {
-  name                 = "order.system"
+  name                 = "ordering-systems3"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {

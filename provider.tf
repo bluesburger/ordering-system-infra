@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "order.system"
+    bucket = "ordering-systems3"
     key    = "bluesburguer/infra.tfstate"
     region = "us-east-1"
   }

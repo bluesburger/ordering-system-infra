@@ -9,7 +9,7 @@
           "ecr:GetDownloadUrlForLayer"
         ],
         "Resource": [
-          "arn:aws:ecr:us-east-1:637423186279:repository/order.system"
+          "arn:aws:ecr:us-east-1:637423186279:repository/ordering-systems3"
         ]
       }
     ]
