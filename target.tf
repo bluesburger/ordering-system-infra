@@ -4,7 +4,7 @@ resource "aws_lb_target_group" "tg" {
   protocol    = "HTTP"
   target_type = "ip"
 
-  vpc_id = var.vpcId
+  vpc_id = data.aws_vpc.existing_vpcs.id
 
   health_check {
     path    = "/swagger-ui/"

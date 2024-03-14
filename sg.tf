@@ -1,7 +1,7 @@
 resource "aws_security_group" "sg" {
   name        = "SG-${var.projectName}"
   description = var.projectName
-  vpc_id      = var.vpcId
+  vpc_id      = data.aws_vpc.existing_vpcs.id
 
   ingress {
     description = "Bluesburguer"

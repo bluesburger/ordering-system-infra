@@ -12,7 +12,7 @@ resource "aws_ecs_task_definition" "task" {
         },
         {
           name  = "SPRING_DATASOURCE_URL"
-          value = "jdbc:mysql://rds-bluesburguer.cvuiykqc6ts9.us-east-1.rds.amazonaws.com:3306/${var.projectName}"
+          value = "jdbc:mysql://${data.aws_db_instance.database.endpoint}/${var.projectName}"
         },
         {
           name  = "SPRING_DATASOURCE_USERNAME"
@@ -47,7 +47,7 @@ resource "aws_ecs_task_definition" "task" {
   # execution_role_arn       = "${data.aws_iam_role.ecs_task_execution_role.arn}"
   # execution_role_arn = "arn:aws:iam::${var.AWSAccount}:role/ecsTaskExecutionRole"
   # execution_role_arn = "arn:aws:iam::${var.AWSAccount}:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS"
-  execution_role_arn = "arn:aws:iam::${var.AWSAccount}:role/OrderingSystemServiceRoleForECS"
+  execution_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/OrderingSystemServiceRoleForECS"
 
   memory = "4096"
   cpu    = "2048"

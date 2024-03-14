@@ -20,7 +20,7 @@ resource "aws_ecr_repository_policy" "repository-policy" {
              "Sid": "new policy",
              "Effect": "Allow",
              "Principal": {
-                 "AWS": "arn:aws:iam::${var.AWSAccount}:root"
+                 "AWS": "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
              },
              "Action": [
                  "ecr:GetDownloadUrlForLayer",

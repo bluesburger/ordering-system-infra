@@ -10,32 +10,20 @@ variable "regionDefault" {
   default = "us-east-1"
 }
 
-variable "subnet01" {
-}
-
-variable "subnet02" {
-}
-
-variable "subnet03" {
-}
-
-variable "vpcId" {
-}
-
 variable "vpcCIDR" {
   default = "172.31.0.0/20"
 }
 
 variable "rdsUser" {
   description = "Inserir usuario do banco em secrets"
+  default     = "root"
 }
 
 variable "rdsPass" {
   description = "Inserir senha do banco em secrets"
+  default     = "Root2024"
 }
 
-variable "AWSAccount" {
-}
 
 # variable "databaseEndpoint" {
 #   default = "rds-bluesburguer.cvuiykqc6ts9.us-east-1.rds.amazonaws.com:5432"
