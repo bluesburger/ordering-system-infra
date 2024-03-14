@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   plan-prod:
-    name: 'Terraform Plan for Production'
+    name: 'Terraform infra'
     runs-on: ubuntu-latest
     env:
       TF_WORKING_DIR: '.'
@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicorp/setup-terraform@v2
 
       - name: Terraform fmt
         id: fmt
@@ -49,41 +49,6 @@ jobs:
         run: TF_LOG=DEBUG terraform plan -no-color 
         continue-on-error: true
 
-      - name: Update GitHub Comment
-        if: github.event_name == 'push'
-        run: |
-          # 1. Retrieve existing bot comments for the PR
-          comments=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.sha }}/comments")
-
-          botCommentId=$(echo "$comments" | jq -r '.[] | select(.user.login == "github-actions[bot]" and .body | contains("Terraform Format and Style")) | .id')
-
-          # 2. Prepare format of the comment
-          output="#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-          #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-          #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
-          <details><summary>Validation Output</summary>
-          \`\`\`\n
-          ${{ steps.validate.outputs.stdout }}
-          \`\`\`
-          </details>
-          #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-          <details><summary>Show Plan</summary>
-          \`\`\`\n
-          ${{ steps.plan.outputs.stdout }}
-          \`\`\`
-          </details>
-          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.TF_WORKING_DIR }}\`, Workflow: \`${{ github.workflow }}\`*"
-
-          # 3. If we have a comment, update it, otherwise create a new one
-          if [ -n "$botCommentId" ]; then
-            curl -X PATCH -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-              -H "Content-Type: application/json" \
-              -d "{\"body\":\"$output\"}" \
-              "https://api.github.com/repos/${{ github.repository }}/issues/comments/$botCommentId"
-          else
-            curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-              -H "Content-Type: application/json" \
-              -d "{\"body\":\"$output\"}" \
-              "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.sha }}/comments"
-          fi
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply -auto-approve
