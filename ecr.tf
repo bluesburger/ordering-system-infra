@@ -67,18 +67,6 @@ resource "aws_ecr_lifecycle_policy" "repository-lifecycle" {
  EOF
 }
 
-resource "null_resource" "push_image_to_ecr" {
-  provisioner "local-exec" {
-    command = <<-EOT
-      $(aws ecr get-login --no-include-email --region ${var.aws_region})
-      docker build -t ${aws_ecr_repository.repository.name}:latest .
-      docker push ${aws_ecr_repository.repository.name}:latest
-    EOT
-  }
-
-  depends_on = [aws_ecr_repository.repository]
-}
-
 
 resource "null_resource" "push_image_to_ecr" {
   provisioner "local-exec" {
