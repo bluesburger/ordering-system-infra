@@ -72,7 +72,7 @@ resource "null_resource" "push_image_to_ecr" {
   provisioner "local-exec" {
     command = <<-EOT
       $(aws ecr get-login --no-include-email --region ${var.aws_region})
-      wget -O Dockerfile https://github.com/bluesburger/ordering-system/blob/main/Dockerfile
+      wget -O Dockerfile https://raw.githubusercontent.com/bluesburger/ordering-system/main/Dockerfile
       docker build -t ${aws_ecr_repository.repository.name}:latest .
       docker push ${aws_ecr_repository.repository.name}:latest
       rm Dockerfile  # Remove o Dockerfile após a conclusão
