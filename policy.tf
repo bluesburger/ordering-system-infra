@@ -10,6 +10,7 @@ resource "aws_iam_role_policy" "orderingsystem_role_policy_for_ecs" {
       {
         Action = [
           "ecr:GetAuthorizationToken",
+          "ecr:PullImage",
           "ecr:BatchGetImage",
           "ecr:GetDownloadUrlForLayer",
         ]
