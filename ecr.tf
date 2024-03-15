@@ -71,15 +71,21 @@ resource "aws_ecr_lifecycle_policy" "repository-lifecycle" {
 resource "null_resource" "push_image_to_ecr" {
   provisioner "local-exec" {
     command = <<-EOT
-      $(aws ecr get-login --no-include-email --region ${var.aws_region})
-      wget -O Dockerfile https://raw.githubusercontent.com/bluesburger/ordering-system/main/Dockerfile
-      docker build -t ${aws_ecr_repository.repository.name}:latest .
-      docker push ${aws_ecr_repository.repository.name}:latest
-      rm Dockerfile  # Remove o Dockerfile após a conclusão
+      aws ecr get-login-password --region ${var.aws_region} | docker login --username AWS --password-stdin ${aws_ecr_repository.repository.repository_url}
+      mkdir -p ./temp_repo  # Cria o diretório temporário, se ainda não existir
+      cd ./temp_repo || exit 1  # Muda para o diretório temporário, ou falha se não for possível
+      git clone https://github.com/bluesburger/ordering-system ./ordering-system-repo  # Clona o repositório com os arquivos Dockerfile
+      cd ./ordering-system-repo || exit 1  # Muda para o diretório do repositório clonado
+      docker build -t ${aws_ecr_repository.repository.repository_url}:latest . 
+      docker push ${aws_ecr_repository.repository.repository_url}:latest
+      rm -rf ./temp_repo  # Remove o diretório temporário após a conclusão
     EOT
 
-    working_dir = "${path.module}"  # Define o diretório de trabalho como o diretório do arquivo Terraform
+    working_dir = path.module # Define o diretório de trabalho como o diretório do arquivo Terraform
   }
 
   depends_on = [aws_ecr_repository.repository]
 }
+
+
+

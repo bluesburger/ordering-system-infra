@@ -43,9 +43,9 @@ resource "aws_iam_role" "orderingsystem_iam_role_for_ecs" {
 }
 
 resource "aws_iam_role_policy_attachment" "orderingsystem_role_policy_attachment" {
-  role       = aws_iam_role.orderingsystem_iam_role_for_ecs.name  # Substitua 'example_role' pelo nome da sua função (role)
-  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"  # ARN da política a ser anexada
-  
+  role       = aws_iam_role.orderingsystem_iam_role_for_ecs.name # Substitua 'example_role' pelo nome da sua função (role)
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"     # ARN da política a ser anexada
+
   # Opcionalmente, você pode definir um nome para o anexo da política
   # name       = "example-policy-attachment"
 }
