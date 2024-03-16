@@ -18,6 +18,7 @@ jobs:
   plan-prod:
     name: 'Terraform infra'
     runs-on: ubuntu-latest
+    environment: 'leandro'
     env:
       TF_WORKING_DIR: '.'
 
@@ -48,9 +49,9 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: TF_LOG=DEBUG terraform plan -no-color 
+        run: TF_LOG=DEBUG terraform plan -input=false -no-color -out latest
         continue-on-error: true
 
       - name: Terraform Apply
         id: apply
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve "latest"
