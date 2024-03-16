@@ -40,14 +40,14 @@ resource "aws_ecs_task_definition" "task" {
       ]
     }
   ])
-  network_mode = "awsvpc"
+  network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
 
   # execution_role_arn       = "${data.aws_iam_role.ecs_task_execution_role.arn}"
   # execution_role_arn = "arn:aws:iam::${var.AWSAccount}:role/ecsTaskExecutionRole"
   # execution_role_arn = "arn:aws:iam::${var.AWSAccount}:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS"
   execution_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/OrderingSystemServiceRoleForECS"
-  memory = "4096"
-  cpu    = "2048"
+  memory             = "4096"
+  cpu                = "2048"
 
 }
