@@ -3,7 +3,7 @@ name: Create Terraform Plan for infra
 on:
   push:
     branches:
-      - '*'
+      - 'develop'
 
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
