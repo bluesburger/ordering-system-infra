@@ -17,23 +17,23 @@ data "aws_vpc" "existing_vpcs" {
 
 
 data "aws_subnet" "existing_subnet1" {
-   tags = {
+  tags = {
     Name = "subnet-terraform-public-1"
-   }
+  }
 }
 
 data "aws_subnet" "existing_subnet2" {
-   tags = {
+  tags = {
     Name = "subnet-terraform-public-2"
-   }
+  }
 }
 
 data "aws_subnet" "existing_subnet3" {
-   tags = {
+  tags = {
     Name = "subnet-terraform-public-3"
-   }
+  }
 }
 
-data "aws_db_instance" "database"{
- db_instance_identifier = "rds-${var.projectName}"
+data "aws_db_instance" "database" {
+  db_instance_identifier = "rds-${var.projectName}"
 }
