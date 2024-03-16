@@ -9,7 +9,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "bucketordingsytem"
+    bucket = "odering-system-bb"
     key    = "bluesburguer/infra.tfstate"
     region = "us-east-1"
   }
