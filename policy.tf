@@ -15,7 +15,7 @@ resource "aws_iam_role_policy" "orderingsystem_role_policy_for_ecs" {
           "ecr:GetDownloadUrlForLayer",
         ]
         Effect   = "Allow"
-        Resource = "arn:aws:ecr:us-east-1:${data.aws_caller_identity.current.account_id}:repository/ordering-systems3"
+        Resource = "arn:aws:ecr:us-east-1:${data.aws_caller_identity.current.account_id}:repository/ordering-systems-marlon"
       },
     ]
   })
