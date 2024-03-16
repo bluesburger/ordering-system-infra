@@ -6,6 +6,7 @@ Repositório para detalhar o banco de dados gerenciado do sistema ordering-syste
 2. Colocar o ID da VPC na variável declarada no vars.tf
 3. Colocar os IDs das 3 primeiras subredes públicas nas variáveis declaradas no arquivo vars.tf
 
+
 Editar Trust-Policy:
 > aws iam update-assume-role-policy --role-name OrderingSystemServiceRoleForECS --policy-document file://trust-policy.json
 
