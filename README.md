@@ -1,25 +1,21 @@
-# Infraestrutura Ordering System
-Repositório para detalhar o banco de dados gerenciado do sistema ordering-system
+# Configurando a Infraestrutura na AWS 
 
-Editar Trust-Policy:
-> aws iam update-assume-role-policy --role-name OrderingSystemServiceRoleForECS --policy-document file://trust-policy.json
+Processo de configuração da infraestrutura na AWS. Abaixo está um guia rápido do primeiro passo para iniciar esse processo:
 
-Criar Trust-Policy:
-> aws iam create-role --role-name OrderingSystemServiceRoleForECS --assume-role-policy-document file://trust-policy.json
+## 1. Criação de uma Conta na AWS
+- Se você ainda não possui uma conta na AWS, o primeiro passo é criar uma. Visite o [site da AWS](https://aws.amazon.com/) e siga as instruções para criar uma nova conta.
 
-Atualizando a Role-Policy:
-> aws iam put-role-policy --role-name OrderingSystemServiceRoleForECS --policy-name OrderingSystemServiceRoleForECS --policy-document file://permission-policy.json
+## 2. Acesso ao Console da AWS
+- Após criar uma conta, faça login no Console de Gerenciamento da AWS usando suas credenciais recém-criadas. Isso lhe dará acesso aos serviços e recursos da AWS.
 
-Anexando a role com a policy "AdministratorAccess"
-> aws iam attach-role-policy --role-name OrderingSystemServiceRoleForECS --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
+## 3. Pegue suas credencias 
+- Crie um usuario no IAM com as permições necessarias, configure nas secrets do github seu usuario e senha aws
 
-Listando as policies anexadas a role:
-> aws iam list-attached-role-policies --role-name OrderingSystemServiceRoleForECS
+## 4. Provisionamento dos Recursos
+- Acesse a aba actions e rode a pipeline na seguencia logica. (Voce esta na infra)
+- Execute o bucket S3
+- Execute o database
+- *Execute a infra*
 
 
-# Comandos úteis:
-> aws rds delete-db-subnet-group --db-subnet-group-name bluesburger
-
-> aws elbv2 describe-target-groups --names TG-bluesburger
-
-> aws elbv2 delete-target-group --target-group-arn arn:aws:elasticloadbalancing:us-east-1:637423186279:targetgroup/TG-bluesburger/082be5af6cb12ba0
+Este README fornece uma visão geral para montar a infraestrutura.
