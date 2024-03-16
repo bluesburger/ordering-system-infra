@@ -16,18 +16,15 @@ variable "vpcCIDR" {
 
 variable "rdsUser" {
   description = "Inserir usuario do banco em secrets"
-  default     = "root"
+  type        = string
+  sensitive   = true
 }
 
 variable "rdsPass" {
   description = "Inserir senha do banco em secrets"
-  default     = "Root2024"
+  type        = string
+  sensitive   = true
 }
-
-
-# variable "databaseEndpoint" {
-#   default = "rds-bluesburguer.cvuiykqc6ts9.us-east-1.rds.amazonaws.com:5432"
-# }
 
 variable "tags" {
   type = map(string)
