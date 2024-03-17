@@ -8,7 +8,7 @@ resource "aws_ecs_service" "service" {
   deployment_maximum_percent         = 200
 
   network_configuration {
-    subnets          = ["${data.aws_subnet.private_subnet1}", "${data.aws_subnet.private_subnet2}"]
+    subnets          = ["${data.aws_subnet.private_subnet1.id}", "${data.aws_subnet.private_subnet2.id}"]
     security_groups  = ["${aws_security_group.sg.id}"]
     assign_public_ip = true
   }
