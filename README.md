@@ -1,7 +1,7 @@
 # Configurando a Infraestrutura na AWS 
 
 Processo de configuração da infraestrutura na AWS. Abaixo está um guia rápido do primeiro passo para iniciar esse processo:
-
+ 
 ## 1. Criação de uma Conta na AWS
 - Se você ainda não possui uma conta na AWS, o primeiro passo é criar uma. Visite o [site da AWS](https://aws.amazon.com/) e siga as instruções para criar uma nova conta.
 
