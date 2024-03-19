@@ -4,7 +4,7 @@ resource "aws_ecs_task_definition" "task" {
     {
       name      = "${var.projectName}"
       essential = true,
-      image     = "851725351817.dkr.ecr.us-east-1.amazonaws.com/ordering-system-prod:latest",
+      image     = "${aws_ecr_repository.repository_url}:latest",
       environment = [
         {
           name  = "SPRING_PROFILES_ACTIVE"
