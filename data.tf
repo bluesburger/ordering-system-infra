@@ -34,18 +34,6 @@ data "aws_subnet" "existing_subnet3" {
   }
 }
 
-data "aws_subnet" "private_subnet1" {
-  tags = {
-    Name = "subnet-terraform-private-1"
-  }
-}
-
-data "aws_subnet" "private_subnet2" {
-  tags = {
-    Name = "subnet-terraform-private-2"
-  }
-}
-
 data "aws_db_instance" "database" {
   db_instance_identifier = "rds-${var.projectName}"
 }
