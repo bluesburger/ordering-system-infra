@@ -17,7 +17,7 @@ jobs:
     name: 'Terraform destroy infra'
     runs-on: ubuntu-latest
 
-    environment: 'marlondev'
+    environment: 'fernando'
     env:
       TF_WORKING_DIR: '.'
 
