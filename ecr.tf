@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "repository" {
-  name                 = "odering-system-bbs3"
+  name                 = "ordering-system-blues-burguer-prod"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
