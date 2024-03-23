@@ -20,7 +20,7 @@ data "aws_subnet" "existing-subnet-private-2" {
 }
 
 data "aws_db_instance" "database" {
-  db_instance_identifier = "rds-${var.project_name}"
+  db_instance_identifier = "rds-blues-burger"
 }
 
 data "aws_security_group" "existing-cluster-security-group" {
