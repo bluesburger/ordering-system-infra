@@ -36,5 +36,5 @@ resource "aws_ecs_service" "service" {
     type = "ECS"
   }
 
-  depends_on = aws_lb.cluster-application-load-balancer
+  depends_on = [aws_lb.cluster-application-load-balancer]
 }

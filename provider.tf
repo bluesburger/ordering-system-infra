@@ -7,11 +7,11 @@ terraform {
   }
   backend "s3" {
     bucket = "ordering-system-bb-dev"
-    key    = "infra-cluster-bluesburguer/infra.tfstate"
-    region = var.region_default
+    key    = "infra-vpc-database/terraform.tfstate"
+    region = "us-east-1"
   }
 }
 
 provider "aws" {
-  region = var.region_default
+  region = "us-east-1"
 }
