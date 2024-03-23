@@ -1,24 +1,17 @@
 terraform {
-
   required_providers {
-
     aws = {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
   }
-
   backend "s3" {
-    bucket = "ordering-system-prod"
-    key    = "bluesburguer/infra.tfstate"
-    region = "us-east-1"
+    bucket = "ordering-system-bb-dev"
+    key    = "infra-cluster-bluesburguer/infra.tfstate"
+    region = var.region_default
   }
 }
 
 provider "aws" {
-  region = var.regionDefault
-
-  default_tags {
-    tags = var.tags
-  }
+  region = var.region_default
 }

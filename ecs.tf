@@ -1,5 +1,5 @@
 resource "aws_ecs_service" "service" {
-  name            = "SVC-${var.projectName}"
+  name            = "SVC-${var.project_name}"
   cluster         = aws_ecs_cluster.cluster.arn
   task_definition = aws_ecs_task_definition.task.arn
 
@@ -8,16 +8,16 @@ resource "aws_ecs_service" "service" {
   deployment_maximum_percent         = 200
 
   network_configuration {
-    subnets          = ["${data.aws_subnet.existing_subnet1.id}", "${data.aws_subnet.existing_subnet2.id}", "${data.aws_subnet.existing_subnet3.id}"]
-    security_groups  = ["${aws_security_group.sg.id}"]
-    assign_public_ip = true
+    subnets          = [data.aws_subnet.existing-subnet-private-1.id, data.aws_subnet.existing-subnet-private-2.id]
+    security_groups  = [data.aws_security_group.existing-cluster-security-group.id]
+    assign_public_ip = false
   }
 
-  health_check_grace_period_seconds = 240
+  health_check_grace_period_seconds = 300
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.tg.arn
-    container_name   = var.projectName
+    target_group_arn = aws_lb_target_group.cluster-alb-target-group.arn
+    container_name   = var.project_name
     container_port   = 8080
   }
 
@@ -36,5 +36,5 @@ resource "aws_ecs_service" "service" {
     type = "ECS"
   }
 
-  depends_on = [aws_lb.alb]
+  depends_on = aws_lb.cluster-application-load-balancer
 }

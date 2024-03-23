@@ -1,39 +1,36 @@
-# data "aws_db_instance" "database" {
-#   db_instance_identifier = "rds-${var.projectName}"
-# }
-
-# data "aws_iam_role" "ecs_task_execution_role" {
-# name = "ecsTaskExecutionRole"
-# arn = "arn:aws:iam::${var.AWSAccount}:role/ecsTaskExecutionRole"
-# }
-
 data "aws_caller_identity" "current" {}
 
-data "aws_vpc" "existing_vpcs" {
+data "aws_vpc" "existing_vpc" {
   tags = {
-    Name = "vpc-terraform"
+    Name = "vpc-blues-burger"
   }
 }
 
 
-data "aws_subnet" "existing_subnet1" {
+data "aws_subnet" "existing-subnet-private-1" {
   tags = {
-    Name = "subnet-terraform-public-1"
+    Name = "subnet-private-blues-burger-1"
   }
 }
 
-data "aws_subnet" "existing_subnet2" {
+data "aws_subnet" "existing-subnet-private-2" {
   tags = {
-    Name = "subnet-terraform-public-2"
-  }
-}
-
-data "aws_subnet" "existing_subnet3" {
-  tags = {
-    Name = "subnet-terraform-public-3"
+    Name = "subnet-private-blues-burger-1"
   }
 }
 
 data "aws_db_instance" "database" {
-  db_instance_identifier = "rds-${var.projectName}"
+  db_instance_identifier = "rds-${var.project_name}"
+}
+
+data "aws_security_group" "existing-cluster-security-group" {
+  tags = {
+    Name = "cluster-security-group"
+  }
+}
+
+data "aws_security_group" "existing-load-balancer-security-group" {
+  tags = {
+    Name = "balancers-security-group"
+  }
 }
