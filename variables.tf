@@ -12,7 +12,7 @@ variable "project_name" {
 
 variable "database_name" {
   description = "Nome do projeto"
-  default     = "bluesburguer"
+  default     = "rds-blues-burger"
   type        = string
 }
 

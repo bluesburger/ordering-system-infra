@@ -33,7 +33,7 @@ resource "aws_ecs_task_definition" "task" {
         },
         {
           name  = "SPRING_DATASOURCE_URL"
-          value = "jdbc:mysql://${data.aws_db_instance.database.endpoint}/${var.project_name}"
+          value = "jdbc:mysql://${data.aws_db_instance.database.endpoint}/${var.database_name}"
         },
         {
           name  = "SPRING_DATASOURCE_USERNAME"
