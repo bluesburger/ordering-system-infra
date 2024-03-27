@@ -7,7 +7,7 @@ terraform {
   }
   backend "s3" {
     bucket = "ordering-system-bb-dev"
-    key    = "infra-vpc-database/terraform.tfstate"
+    key    = "infra-vpc-cluster-bb/terraform.tfstate"
     region = "us-east-1"
   }
 }
