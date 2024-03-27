@@ -10,9 +10,15 @@ variable "project_name" {
   type        = string
 }
 
+variable "database_name" {
+  description = "Nome do projeto"
+  default     = "bluesburguer"
+  type        = string
+}
+
 variable "cluster_name" {
   description = "Nome do cluster ECS"
-  default     = "BluesBurguer"
+  default     = "bluesburguer"
   type        = string
 }
 
