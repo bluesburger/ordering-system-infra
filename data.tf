@@ -15,7 +15,7 @@ data "aws_subnet" "existing-subnet-private-1" {
 
 data "aws_subnet" "existing-subnet-private-2" {
   tags = {
-    Name = "subnet-private-blues-burger-1"
+    Name = "subnet-private-blues-burger-2"
   }
 }
 
