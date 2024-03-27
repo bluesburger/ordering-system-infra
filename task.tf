@@ -37,11 +37,11 @@ resource "aws_ecs_task_definition" "task" {
         },
         {
           name  = "SPRING_DATASOURCE_USERNAME"
-          value = "admin" # TODO - retirar hardcoded
+          value = "${var.rds_user}" # TODO - retirar hardcoded
         },
         {
           name  = "SPRING_DATASOURCE_PASSWORD"
-          value = "Root123456" # TODO - retirar hardcoded
+          value = "${var.rds_pass}" # TODO - retirar hardcoded
         }
       ],
 
