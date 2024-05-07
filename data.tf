@@ -11,7 +11,7 @@ data "aws_caller_identity" "current" {}
 
 data "aws_vpc" "existing_vpcs" {
   tags = {
-    Name = "vpc-terraform"
+    Name = "vpc-blues-burger"
   }
 }
 
@@ -50,5 +50,5 @@ data "aws_subnet" "existing_subnet4" {
 }
 
 data "aws_db_instance" "database" {
-  db_instance_identifier = "rds-${var.projectName}"
+  db_instance_identifier = "rds-${var.project_name_order}"
 }

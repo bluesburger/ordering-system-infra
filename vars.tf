@@ -24,7 +24,23 @@ variable "rdsPass" {
   default     = "Root2024"
 }
 
+variable "project_name_dynamo" {
+  description = "Nome do projeto. Por exemplo, 'bluesburguer'."
+  default     = "payment"
+  type        = string
+}
 
+variable "project_name_menu" {
+  description = "Nome do projeto. Por exemplo, 'bluesburguer'."
+  default     = "blues-burger-menu"
+  type        = string
+}
+
+variable "project_name_order" {
+  description = "Nome do projeto. Por exemplo, 'bluesburguer'."
+  default     = "blues-burger-order"
+  type        = string
+}
 # variable "databaseEndpoint" {
 #   default = "rds-bluesburguer.cvuiykqc6ts9.us-east-1.rds.amazonaws.com:5432"
 # }
