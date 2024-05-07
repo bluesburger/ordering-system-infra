@@ -8,8 +8,8 @@ resource "aws_ecs_service" "service" {
   deployment_maximum_percent         = 200
 
   network_configuration {
-    subnets          = ["${data.aws_subnet.existing_subnet1.id}", "${data.aws_subnet.existing_subnet2.id}", "${data.aws_subnet.existing_subnet3.id}"]
-    security_groups  = ["${aws_security_group.sg.id}"]
+    subnets          = ["${data.aws_subnet.existing_subnet1.id}", "${data.aws_subnet.existing_subnet2.id}", "${data.aws_subnet.existing_subnet3.id}", "${data.aws_subnet.existing_subnet4.id}"]
+    security_groups  = ["${data.terraform_remote_state.other_repo.outputs.public_subnet_sg_id}"]
     assign_public_ip = true
   }
 
