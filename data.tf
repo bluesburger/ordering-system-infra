@@ -15,22 +15,37 @@ data "aws_vpc" "existing_vpcs" {
   }
 }
 
+//referencia o SG criado no repositorio de database
+data "terraform_remote_state" "other_repo" {
+  backend = "s3"
+  config = {
+    bucket = "ordering-system-prod"
+    key    = "bluesburguer/database.tfstate"
+    region = "us-east-1"
+  }
+}
 
 data "aws_subnet" "existing_subnet1" {
   tags = {
-    Name = "subnet-terraform-public-1"
+    Name = "subnet-public-blues-burger-1"
   }
 }
 
 data "aws_subnet" "existing_subnet2" {
   tags = {
-    Name = "subnet-terraform-public-2"
+    Name = "subnet-public-blues-burger-2"
   }
 }
 
 data "aws_subnet" "existing_subnet3" {
   tags = {
-    Name = "subnet-terraform-public-3"
+    Name = "subnet-private-blues-burger-1"
+  }
+}
+
+data "aws_subnet" "existing_subnet4" {
+  tags = {
+    Name = "subnet-private-blues-burger-2"
   }
 }
 
