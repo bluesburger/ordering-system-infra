@@ -53,7 +53,6 @@ variable "tags" {
   }
 }
 
-# Define a variável com a região da AWS
 variable "aws_region" {
   default = "us-east-1"
 }
