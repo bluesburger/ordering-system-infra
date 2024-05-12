@@ -1,5 +1,5 @@
 resource "aws_ecs_service" "service" {
-  name            = "SVC-${var.projectName}"
+  name            = "SVC-${var.project_name_dynamo}"
   cluster         = aws_ecs_cluster.cluster.arn
   task_definition = aws_ecs_task_definition.task.arn
 
