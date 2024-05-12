@@ -17,7 +17,7 @@ resource "aws_ecs_service" "service" {
 
   load_balancer {
     target_group_arn = aws_lb_target_group.tg.arn
-    container_name   = var.projectName
+    container_name   = var.project_name_dynamo
     container_port   = 8080
   }
 
