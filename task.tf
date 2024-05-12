@@ -64,7 +64,7 @@ resource "aws_ecs_task_definition" "task" {
 
   container_definitions = jsonencode([
     {
-      name      = "${var.projectName}"
+      name      = "${var.project_name_dynamo}"
       essential = true,
       image     = "${aws_ecr_repository.repository.repository_url}:payment",
       environment = [
@@ -72,7 +72,6 @@ resource "aws_ecs_task_definition" "task" {
           name  = "SPRING_PROFILES_ACTIVE"
           value = "dev"
         }
-        # Você pode adicionar outras variáveis de ambiente necessárias para sua aplicação aqui
       ],
       logConfiguration = {
         logDriver = "awslogs"
