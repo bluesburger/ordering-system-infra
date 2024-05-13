@@ -51,7 +51,7 @@ resource "aws_appautoscaling_target" "autoscaling_target_order" {
   tags = var.tags
 }
 
-resource "aws_appautoscaling_policy" "memory_policy" {
+resource "aws_appautoscaling_policy" "memory_policy_order" {
   name               = "scaleby-memory"
   policy_type        = "TargetTrackingScaling"
   resource_id        = aws_appautoscaling_target.autoscaling_target_order.resource_id
@@ -67,7 +67,7 @@ resource "aws_appautoscaling_policy" "memory_policy" {
   }
 }
 
-resource "aws_appautoscaling_policy" "cpu_policy" {
+resource "aws_appautoscaling_policy" "cpu_policy_order" {
   name               = "scaleby-cpu"
   policy_type        = "TargetTrackingScaling"
   resource_id        = aws_appautoscaling_target.autoscaling_target_order.resource_id
