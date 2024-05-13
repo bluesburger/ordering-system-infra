@@ -71,6 +71,10 @@ resource "aws_ecs_task_definition" "task" {
         {
           name  = "SPRING_PROFILES_ACTIVE"
           value = "dev"
+        },
+        {
+          name  = "NOTIFICATION_URL"
+          value = "url_test"
         }
       ],
       logConfiguration = {
