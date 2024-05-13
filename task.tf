@@ -75,6 +75,14 @@ resource "aws_ecs_task_definition" "task" {
         {
           name  = "NOTIFICATION_URL"
           value = "url_test"
+        },
+        {
+          name  = "AWS_SECRET_ACCESS_KEY"
+          value = var.aws_secret_key
+        },
+        {
+          name  = "AWS_ACCESS_KEY_ID"
+          value = var.aws_access_key
         }
       ],
       logConfiguration = {
