@@ -106,19 +106,19 @@ resource "null_resource" "push_image_to_ecr" {
 
 
 # Definição de um recurso de execução local para fazer o push da imagem "order"
-#resource "null_resource" "push_image_order_to_ecr" {
-#  provisioner "local-exec" {
-#    command = <<-EOT
-#      aws ecr get-login-password --region ${var.aws_region} | docker login --username AWS --password-stdin ${aws_ecr_repository.repository.repository_url}
-#      mkdir -p ./temp_repo_order  # Cria diretório temporário exclusivo para o pedido
-#      cd ./temp_repo_order || exit 1
-#      git clone https://github.com/bluesburger/bluesburguer-order ./ordering-system-repo
-#      cd ./ordering-system-repo || exit 1
-#      docker build -t ${aws_ecr_repository.repository.repository_url}:order .
-#      docker push ${aws_ecr_repository.repository.repository_url}:order
-#      rm -rf ./temp_repo_order
-#    EOT
-#    working_dir = path.module
-#  }
-#  depends_on = [aws_ecr_repository.repository]
-#}
+resource "null_resource" "push_image_order_to_ecr" {
+  provisioner "local-exec" {
+    command = <<-EOT
+      aws ecr get-login-password --region ${var.aws_region} | docker login --username AWS --password-stdin ${aws_ecr_repository.repository.repository_url}
+      mkdir -p ./temp_repo_order  # Cria diretório temporário exclusivo para o pedido
+      cd ./temp_repo_order || exit 1
+      git clone https://github.com/bluesburger/bluesburguer-order ./ordering-system-repo
+      cd ./ordering-system-repo || exit 1
+      docker build -t ${aws_ecr_repository.repository.repository_url}:order .
+      docker push ${aws_ecr_repository.repository.repository_url}:order
+      rm -rf ./temp_repo_order
+    EOT
+    working_dir = path.module
+  }
+  depends_on = [aws_ecr_repository.repository]
+}
