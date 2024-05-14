@@ -1,9 +1,9 @@
 output "ecs-service-name-payment" {
   value = aws_ecs_service.service_payment.name
 }
-output "ecs-service-name-order" {
-  value = aws_ecs_service.service_order.name
-}
+#output "ecs-service-name-order" {
+#  value = aws_ecs_service.service_order.name
+#}
 
 output "ecr-repository-name" {
   value = aws_ecr_repository.repository.name
