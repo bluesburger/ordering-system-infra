@@ -70,7 +70,7 @@ resource "aws_ecs_task_definition" "task" {
       environment = [
         {
           name  = "SPRING_PROFILES_ACTIVE"
-          value = "dev"
+          value = "prod"
         },
         {
           name  = "NOTIFICATION_URL"
