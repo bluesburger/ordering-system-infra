@@ -118,7 +118,7 @@ resource "aws_ecs_task_definition" "task_order" {
       environment = [
         {
           name  = "SPRING_PROFILES_ACTIVE"
-          value = "dev"
+          value = "production"
         },
         {
           name  = "SPRING_DATASOURCE_URL"
