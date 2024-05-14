@@ -19,7 +19,7 @@ data "aws_vpc" "existing_vpcs" {
 data "terraform_remote_state" "other_repo" {
   backend = "s3"
   config = {
-    bucket = "ordering-system-prod"
+    bucket = "ordering-system-bb-dev"
     key    = "bluesburguer/database.tfstate"
     region = "us-east-1"
   }
