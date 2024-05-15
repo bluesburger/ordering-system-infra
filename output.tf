@@ -5,6 +5,10 @@ output "ecs-service-name-order" {
   value = aws_ecs_service.service_order.name
 }
 
+output "ecs-service-name-production" {
+  value = aws_ecs_service.service_production.name
+}
+
 output "ecr-repository-name" {
   value = aws_ecr_repository.repository.name
 }

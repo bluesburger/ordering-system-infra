@@ -48,6 +48,12 @@ variable "project_name_order-rds" {
   type        = string
 }
 
+variable "project_name_production" {
+  description = "Nome do projeto. Por exemplo, 'bluesburguer'."
+  default     = "blues-burger-production"
+  type        = string
+}
+
 # variable "databaseEndpoint" {
 #   default = "rds-bluesburguer.cvuiykqc6ts9.us-east-1.rds.amazonaws.com:5432"
 # }
