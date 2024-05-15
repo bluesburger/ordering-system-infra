@@ -124,7 +124,7 @@ resource "null_resource" "push_image_order_to_ecr" {
 }
 
 # Definição de um recurso de execução local para fazer o push da imagem "production"
-resource "null_resource" "push_image_order_to_ecr" {
+resource "null_resource" "push_image_production_to_ecr" {
   provisioner "local-exec" {
     command = <<-EOT
       aws ecr get-login-password --region ${var.aws_region} | docker login --username AWS --password-stdin ${aws_ecr_repository.repository.repository_url}

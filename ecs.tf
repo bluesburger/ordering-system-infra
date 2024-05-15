@@ -83,7 +83,7 @@ resource "aws_ecs_service" "service_order" {
 resource "aws_ecs_service" "service_production" {
   name            = "SVC-${var.project_name_production}"
   cluster         = aws_ecs_cluster.cluster.arn
-  task_definition = aws_ecs_task_definition.task_order.arn
+  task_definition = aws_ecs_task_definition.task_production.arn
 
   desired_count                      = 1
   deployment_minimum_healthy_percent = 100

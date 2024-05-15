@@ -168,7 +168,7 @@ resource "aws_ecs_task_definition" "task_order" {
 }
 
 
-#resource "aws_ecs_task_definition" "task" {
+resource "aws_ecs_task_definition" "task_production" {
   family = "TSK-${var.projectName}"
 
   container_definitions = jsonencode([
