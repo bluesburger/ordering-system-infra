@@ -50,5 +50,5 @@ data "aws_subnet" "existing_subnet4" {
 }
 
 data "aws_db_instance" "database" {
-  db_instance_identifier = "rds-${var.project_name_order-rds}"
+  db_instance_identifier = var.project_name_order-rds
 }

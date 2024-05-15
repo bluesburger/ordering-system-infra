@@ -44,7 +44,7 @@ variable "project_name_order" {
 
 variable "project_name_order-rds" {
   description = "Nome do projeto. Por exemplo, 'bluesburguer'."
-  default     = "dborder"
+  default     = "rds-dborder"
   type        = string
 }
 
