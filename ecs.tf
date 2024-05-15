@@ -99,7 +99,7 @@ resource "aws_ecs_service" "service_production" {
 
   load_balancer {
     target_group_arn = aws_lb_target_group.tg.arn
-    container_name   = var.project_name_order
+    container_name   = var.project_name_production
     container_port   = 8080
   }
 
