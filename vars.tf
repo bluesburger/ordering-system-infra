@@ -16,7 +16,7 @@ variable "vpcCIDR" {
 
 variable "rdsUser" {
   description = "Inserir usuario do banco em secrets"
-  default     = "root"
+  default     = "Root"
 }
 
 variable "rdsPass" {
