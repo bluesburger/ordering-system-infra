@@ -86,23 +86,23 @@ resource "aws_ecr_lifecycle_policy" "repository-lifecycle" {
 #  depends_on = [aws_ecr_repository.repository]
 #}
 
-# Definição de um recurso de execução local para fazer o push da imagem "payment"
-resource "null_resource" "push_image_to_ecr" {
-  provisioner "local-exec" {
-    command = <<-EOT
-      aws ecr get-login-password --region ${var.aws_region} | docker login --username AWS --password-stdin ${aws_ecr_repository.repository.repository_url}
-      mkdir -p ./temp_repo_payment  # Cria diretório temporário exclusivo para o pagamento
-      cd ./temp_repo_payment || exit 1
-      git clone https://github.com/bluesburger/ordering-system-microservice-payment ./ordering-system-repo
-      cd ./ordering-system-repo || exit 1
-      docker build -t ${aws_ecr_repository.repository.repository_url}:payment .
-      docker push ${aws_ecr_repository.repository.repository_url}:payment
-      rm -rf ./temp_repo_payment
-    EOT
-    working_dir = path.module
-  }
-  depends_on = [aws_ecr_repository.repository]
-}
+## Definição de um recurso de execução local para fazer o push da imagem "payment"
+#resource "null_resource" "push_image_to_ecr" {
+#  provisioner "local-exec" {
+#    command = <<-EOT
+#      aws ecr get-login-password --region ${var.aws_region} | docker login --username AWS --password-stdin ${aws_ecr_repository.repository.repository_url}
+#      mkdir -p ./temp_repo_payment  # Cria diretório temporário exclusivo para o pagamento
+#      cd ./temp_repo_payment || exit 1
+#      git clone https://github.com/bluesburger/ordering-system-microservice-payment ./ordering-system-repo
+#      cd ./ordering-system-repo || exit 1
+#      docker build -t ${aws_ecr_repository.repository.repository_url}:payment .
+#      docker push ${aws_ecr_repository.repository.repository_url}:payment
+#      rm -rf ./temp_repo_payment
+#    EOT
+#    working_dir = path.module
+#  }
+#  depends_on = [aws_ecr_repository.repository]
+#}
 
 
 # Definição de um recurso de execução local para fazer o push da imagem "order"
