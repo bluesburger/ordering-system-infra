@@ -122,7 +122,7 @@ resource "aws_ecs_task_definition" "task_order" {
         },
         {
           name  = "SPRING_DATASOURCE_URL"
-          value = "jdbc:mysql://${data.aws_db_instance.database.endpoint}/${var.projectName}"
+          value = "jdbc:mysql://${data.aws_db_instance.database.endpoint}/${var.project_name_order-rds}"
         },
         {
           name  = "SPRING_DATASOURCE_USERNAME"
