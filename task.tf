@@ -165,7 +165,7 @@ resource "aws_ecs_task_definition" "task_order" {
 #   # depends_on = [
 #   #   data.aws_iam_role.ecs_task_execution_role
 #   # ]
-# }
+}
 
 
 resource "aws_ecs_task_definition" "task_production" {
