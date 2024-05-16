@@ -114,7 +114,7 @@ resource "aws_ecs_task_definition" "task_order" {
     {
       name      = "${var.project_name_order}"
       essential = true,
-      image     = "${aws_ecr_repository.repository.repository_url}:order",
+      image     = "${aws_ecr_repository.repository_order.repository_url}:latest",
       environment = [
         {
           name  = "SPRING_PROFILES_ACTIVE"
@@ -122,7 +122,7 @@ resource "aws_ecs_task_definition" "task_order" {
         },
         {
           name  = "SPRING_DATASOURCE_URL"
-          value = "jdbc:mysql://${data.aws_db_instance.database.endpoint}/${var.project_name_order-rds}"
+          value = "jdbc:mysql://${data.aws_db_instance.database.endpoint}/${var.project_name_order-rds}?useSSL=false&useTimezone=true&serverTimezone=UTC"
         },
         {
           name  = "SPRING_DATASOURCE_USERNAME"
@@ -175,11 +175,11 @@ resource "aws_ecs_task_definition" "task_production" {
     {
       name      = "${var.project_name_production}"
       essential = true,
-      image     = "${aws_ecr_repository.repository.repository_url}:production",
+      image     = "${aws_ecr_repository.repository_prod.repository_url}:latest",
       environment = [
         {
           name  = "SPRING_PROFILES_ACTIVE"
-          value = "prod"
+          value = "production"
         },
         {
           name  = "NOTIFICATION_URL"
@@ -204,7 +204,7 @@ resource "aws_ecs_task_definition" "task_production" {
     }
   ])
 
-  network_mode = "awsvpc"
+  network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
 
   # Use a role IAM adequada que permita acesso ao DynamoDB

@@ -17,6 +17,16 @@ resource "aws_iam_role_policy" "orderingsystem_role_policy_for_ecs" {
         Effect   = "Allow"
         Resource = "arn:aws:ecr:us-east-1:${data.aws_caller_identity.current.account_id}:repository/ordering-system-prod"
       },
+      {
+        Action = [
+          "ecr:GetAuthorizationToken",
+          "ecr:PullImage",
+          "ecr:BatchGetImage",
+          "ecr:GetDownloadUrlForLayer",
+        ]
+        Effect   = "Allow"
+        Resource = "arn:aws:ecr:us-east-1:${data.aws_caller_identity.current.account_id}:repository/ordering-system-order"
+      },
     ]
   })
 }

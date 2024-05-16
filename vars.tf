@@ -16,11 +16,15 @@ variable "vpcCIDR" {
 
 variable "rdsUser" {
   description = "Inserir usuario do banco em secrets"
+  type        = string
+  sensitive   = true
   default     = "Root"
 }
 
 variable "rdsPass" {
   description = "Inserir senha do banco em secrets"
+  type        = string
+  sensitive   = true
   default     = "Root2024"
 }
 

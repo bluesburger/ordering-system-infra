@@ -9,15 +9,43 @@ output "ecs-service-name-production" {
   value = aws_ecs_service.service_production.name
 }
 
-output "ecr-repository-name" {
-  value = aws_ecr_repository.repository.name
+output "ecr-repository-order-name" {
+  value = aws_ecr_repository.repository_order.name
 }
 
-output "ecr-repository-url" {
-  value = aws_ecr_repository.repository.repository_url
+output "ecr-repository-order-url" {
+  value = aws_ecr_repository.repository_order.repository_url
 }
 
-# Saída para exibir a URL da fila SQS criada
-output "queue_url" {
-  value = aws_sqs_queue.order_queue.id
+output "ecr-repository-prod-name" {
+  value = aws_ecr_repository.repository_prod.name
+}
+
+output "ecr-repository-prod-url" {
+  value = aws_ecr_repository.repository_prod.repository_url
+}
+
+# Saída para exibir a URL das filas SQS criadas
+output "order_paid_queue" {
+  value = aws_sqs_queue.order_paid_queue.id
+}
+
+output "order_in_production_queue" {
+  value = aws_sqs_queue.order_in_production_queue.id
+}
+
+output "order_produced_queue" {
+  value = aws_sqs_queue.order_produced_queue.id
+}
+
+output "order_delivering_queue" {
+  value = aws_sqs_queue.order_delivering_queue.id
+}
+
+output "order_delivered_queue" {
+  value = aws_sqs_queue.order_delivered_queue.id
+}
+
+output "order_canceled_queue" {
+  value = aws_sqs_queue.order_canceled_queue.id
 }
