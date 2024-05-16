@@ -1,5 +1,5 @@
-resource "aws_ecr_repository" "repository_prod" {
-  name                 = "ordering-system-prod"
+resource "aws_ecr_repository" "repository" {
+  name                 = "ordering-system-payment"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -9,8 +9,9 @@ resource "aws_ecr_repository" "repository_prod" {
   force_delete = true
 }
 
-resource "aws_ecr_repository_policy" "repository-prod-policy" {
-  repository = aws_ecr_repository.repository_prod.name
+
+resource "aws_ecr_repository_policy" "repository-policy" {
+  repository = aws_ecr_repository.repository.name
 
   policy = <<EOF
   {
@@ -44,8 +45,8 @@ resource "aws_ecr_repository_policy" "repository-prod-policy" {
  EOF
 }
 
-resource "aws_ecr_lifecycle_policy" "repository-prod-lifecycle" {
-  repository = aws_ecr_repository.repository_prod.name
+resource "aws_ecr_lifecycle_policy" "repository-lifecycle" {
+  repository = aws_ecr_repository.repository.name
 
   policy = <<EOF
  {
@@ -67,20 +68,22 @@ resource "aws_ecr_lifecycle_policy" "repository-prod-lifecycle" {
  EOF
 }
 
-# Definição de um recurso de execução local para fazer o push da imagem "production"
-resource "null_resource" "push_image_prod_to_ecr" {
+
+
+# Definição de um recurso de execução local para fazer o push da imagem "payment"
+resource "null_resource" "push_image_to_ecr" {
   provisioner "local-exec" {
-    command     = <<-EOT
-      aws ecr get-login-password --region ${var.aws_region} | docker login --username AWS --password-stdin ${aws_ecr_repository.repository_prod.repository_url}
-      mkdir -p ./temp_repo_prod  # Cria diretório temporário exclusivo para o pedido
-      cd ./temp_repo_prod || exit 1
-      git clone https://github.com/bluesburger/orderingsystem-production ./ordering-system-repo-prod
-      cd ./ordering-system-repo-prod || exit 1
-      docker build -t ${aws_ecr_repository.repository_prod.repository_url}:latest .
-      docker push ${aws_ecr_repository.repository_prod.repository_url}:latest
-      rm -rf ./temp_repo_prod
+    command = <<-EOT
+      aws ecr get-login-password --region ${var.aws_region} | docker login --username AWS --password-stdin ${aws_ecr_repository.repository.repository_url}
+      mkdir -p ./temp_repo_payment  # Cria diretório temporário exclusivo para o pagamento
+      cd ./temp_repo_payment || exit 1
+      git clone https://github.com/bluesburger/ordering-system-microservice-payment ./ordering-system-repo
+      cd ./ordering-system-repo || exit 1
+      docker build -t ${aws_ecr_repository.repository.repository_url}:payment .
+      docker push ${aws_ecr_repository.repository.repository_url}:payment
+      rm -rf ./temp_repo_payment
     EOT
     working_dir = path.module
   }
-  depends_on = [aws_ecr_repository.repository_prod]
+  depends_on = [aws_ecr_repository.repository]
 }
