@@ -9,7 +9,7 @@
           "ecr:GetDownloadUrlForLayer"
         ],
         "Resource": [
-          "arn:aws:ecr:us-east-1:637423186279:repository/ordering-system-prod",
+          "arn:aws:ecr:us-east-1:637423186279:repository/bb-ordering-system-prod",
           "arn:aws:ecr:us-east-1:637423186279:repository/ordering-system-order"
         ]
       }
