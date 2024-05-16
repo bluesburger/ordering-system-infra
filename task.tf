@@ -162,10 +162,10 @@ resource "aws_ecs_task_definition" "task_order" {
   memory = "4096"
   cpu    = "2048"
 
-  # depends_on = [
-  #   data.aws_iam_role.ecs_task_execution_role
-  # ]
-}
+#   # depends_on = [
+#   #   data.aws_iam_role.ecs_task_execution_role
+#   # ]
+# }
 
 
 resource "aws_ecs_task_definition" "task_production" {
@@ -180,6 +180,14 @@ resource "aws_ecs_task_definition" "task_production" {
         {
           name  = "SPRING_PROFILES_ACTIVE"
           value = "production"
+        },
+        {
+          name  = "AWS_ACCESS_KEY_ID"
+          value = ""
+        },
+        {
+          name  = "AWS_SECRET_ACCESS_KEY"
+          value = ""
         },
         {
           name  = "NOTIFICATION_URL"
