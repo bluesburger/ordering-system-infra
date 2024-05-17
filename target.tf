@@ -12,3 +12,18 @@ resource "aws_lb_target_group" "tg" {
     matcher = "200,301"
   }
 }
+
+resource "aws_lb_target_group" "tg_prod" {
+  name        = "TG-${var.projectName}-prod"
+  port        = 9090
+  protocol    = "HTTP"
+  target_type = "ip"
+
+  vpc_id = data.aws_vpc.existing_vpcs.id
+
+  health_check {
+    path    = "/actuator/health"
+    port    = 9090
+    matcher = "200,301"
+  }
+}
