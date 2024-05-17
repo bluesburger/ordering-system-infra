@@ -23,7 +23,7 @@ resource "aws_lb_target_group" "tg_prod" {
 
   health_check {
     path    = "/actuator/health"
-    port    = 9090
+    port    = 8080
     matcher = "200,301"
   }
 }
