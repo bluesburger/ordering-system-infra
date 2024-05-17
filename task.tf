@@ -122,7 +122,7 @@ resource "aws_ecs_task_definition" "task_order" {
         },
         {
           name  = "SPRING_DATASOURCE_URL"
-          value = "jdbc:mysql://${data.aws_db_instance.database.endpoint}/${var.project_name_order-rds}?useSSL=false&useTimezone=true&serverTimezone=UTC"
+          value = "jdbc:mysql://${data.aws_db_instance.database.endpoint}/dbbluesburger?useSSL=false&useTimezone=true&serverTimezone=UTC"
         },
         {
           name  = "SPRING_DATASOURCE_USERNAME"
@@ -180,6 +180,14 @@ resource "aws_ecs_task_definition" "task_production" {
         {
           name  = "SPRING_PROFILES_ACTIVE"
           value = "production"
+        },
+        {
+          name  = "AWS_ACCESS_KEY_ID"
+          value = "${var.aws_access_key}"
+        },
+        {
+          name  = "AWS_SECRET_ACCESS_KEY"
+          value = "${var.aws_secret_key}"
         },
         {
           name  = "NOTIFICATION_URL"
