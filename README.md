@@ -17,5 +17,8 @@ Processo de configuração da infraestrutura na AWS. Abaixo está um guia rápid
 - Execute o database
 - *Execute a infra*
 
+## 5. Acesso via Web
+- http://alb-bluesburguer-231418065.us-east-1.elb.amazonaws.com/swagger-ui/index.html
+- http://alb-bluesburguer-231418065.us-east-1.elb.amazonaws.com:90/swagger-ui/index.html
 
 Este README fornece uma visão geral para montar a infraestrutura.
