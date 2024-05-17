@@ -131,6 +131,14 @@ resource "aws_ecs_task_definition" "task_order" {
         {
           name  = "SPRING_DATASOURCE_PASSWORD"
           value = "${var.rdsPass}"
+        },
+        {
+          name  = "SPRING_JPA_GENERATE_DDL"
+          value = "true"
+        },
+        {
+          name  = "SPRING_JPA_HIBERNATE_DDL_AUTO"
+          value = "update"
         }
       ]
       logConfiguration = {
@@ -195,7 +203,7 @@ resource "aws_ecs_task_definition" "task_production" {
         },
         {
           name  = "ORDER_ENDPOINT_HOST",
-          value = "http://alb-bluesburguer-231418065.us-east-1.elb.amazonaws.com"
+          value = "http://alb-bluesburguer-1873661154.us-east-1.elb.amazonaws.com"
         }
       ],
       logConfiguration = {
