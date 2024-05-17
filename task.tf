@@ -203,7 +203,7 @@ resource "aws_ecs_task_definition" "task_production" {
         },
         {
           name  = "ORDER_ENDPOINT_HOST",
-          value = "http://alb-bluesburguer-1873661154.us-east-1.elb.amazonaws.com"
+          value = "http://${aws_lb.alb.dns_name}"
         }
       ],
       logConfiguration = {
