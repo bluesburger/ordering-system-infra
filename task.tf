@@ -192,6 +192,10 @@ resource "aws_ecs_task_definition" "task_production" {
         {
           name  = "NOTIFICATION_URL"
           value = "url_test"
+        },
+        {
+          name  = "ORDER_ENDPOINT_HOST",
+          value = "http://alb-bluesburguer-231418065.us-east-1.elb.amazonaws.com"
         }
       ],
       logConfiguration = {
