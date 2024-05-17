@@ -18,14 +18,12 @@ variable "rdsUser" {
   description = "Inserir usuario do banco em secrets"
   type        = string
   sensitive   = true
-  default     = "Root"
 }
 
 variable "rdsPass" {
   description = "Inserir senha do banco em secrets"
   type        = string
   sensitive   = true
-  default     = "Root2024"
 }
 
 variable "project_name_dynamo" {
@@ -75,10 +73,19 @@ variable "aws_region" {
 }
 
 variable "aws_access_key" {
-  default = "sua_access_key"
+  description = "Inserir aws access key"
+  type        = string
+  sensitive   = true
 }
 
 variable "aws_secret_key" {
-  default = "sua_secret_key"
+  description = "Inserir aws secret key"
+  type        = string
+  sensitive   = true
 }
 
+variable "domain_name" {
+  description = "Inserir aws secret key"
+  type        = string
+  default     = "bluesburguer.terraform.com"
+}
