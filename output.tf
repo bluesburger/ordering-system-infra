@@ -53,3 +53,7 @@ output "order_canceled_queue" {
 output "alb_dns_name" {
   value = aws_lb.alb.dns_name
 }
+
+output "payment_notification_url" {
+  value = "http://${aws_lb.alb.dns_name}:70/api/v1/payment/webhook"
+}
