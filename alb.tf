@@ -8,17 +8,6 @@ resource "aws_lb" "alb" {
 
 }
 
-resource "aws_lb_listener" "alb-listener-redirect_order" {
-  load_balancer_arn = aws_lb.alb.arn
-  port              = "80"
-  protocol          = "HTTP"
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.tg.arn
-  }
-}
-
 resource "aws_lb_listener" "alb-listener-redirect_prod" {
   load_balancer_arn = aws_lb.alb.arn
   port              = "90"
@@ -30,6 +19,17 @@ resource "aws_lb_listener" "alb-listener-redirect_prod" {
   }
 }
 
+resource "aws_lb_listener" "alb-listener-redirect_order" {
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.tg.arn
+  }
+}
+
 resource "aws_lb_listener" "alb-listener-redirect_payment" {
   load_balancer_arn = aws_lb.alb.arn
   port              = "70"
@@ -38,5 +38,16 @@ resource "aws_lb_listener" "alb-listener-redirect_payment" {
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.tg_payment.arn
+  }
+}
+
+resource "aws_lb_listener" "alb-listener-redirect_menu" {
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "60"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.tg_menu.arn
   }
 }

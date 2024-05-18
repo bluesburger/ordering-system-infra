@@ -57,3 +57,15 @@ output "alb_dns_name" {
 output "payment_notification_url" {
   value = "http://${aws_lb.alb.dns_name}:70/api/v1/payment/webhook"
 }
+
+output "menu_datasource_url" {
+  value = data.aws_db_instance.database_menu.endpoint
+}
+
+output "database_order" {
+  value = data.aws_db_instance.database.db_instance_identifier
+}
+
+output "database_menu" {
+  value = data.aws_db_instance.database_menu.db_instance_identifier
+}
