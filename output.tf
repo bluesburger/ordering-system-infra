@@ -69,3 +69,7 @@ output "database_order" {
 output "database_menu" {
   value = data.aws_db_instance.database_menu.db_instance_identifier
 }
+
+output "rest_api_id" {
+  value = aws_api_gateway_rest_api.rest_api.id
+}

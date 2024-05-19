@@ -1,33 +1,60 @@
 resource "aws_api_gateway_rest_api" "rest_api" {
   name = "${var.projectName}-api-gateway-rest-api"
   endpoint_configuration {
-    types            = ["PRIVATE"]
-    vpc_endpoint_ids = [data.aws_vpc_endpoint.vpc_endpoint.id]
+    types = ["REGIONAL"]
+    # vpc_endpoint_ids = [data.aws_vpc_endpoint.vpc_endpoint.id]
+  }
+  body = jsonencode({
+    openapi = "3.0.1"
+    info = {
+      title   = "Orders"
+      version = "1.0"
+    }
+    paths = {
+      "/orders" = {
+        get = {
+          x-amazon-apigateway-integration = {
+            httpMethod           = "GET"
+            payloadFormatVersion = "1.0"
+            type                 = "aws"
+            #uri                  = "http://${aws_lb.alb.dns_name}/"
+            uri = "arn:aws:execute-api:us-east-1:${data.aws_caller_identity.current.account_id}:*/prod/orders"
+          }
+        }
+      }
+    }
+  })
+}
+
+resource "aws_api_gateway_deployment" "rest_api" {
+  rest_api_id = aws_api_gateway_rest_api.rest_api.id
+
+  triggers = {
+    redeployment = sha1(jsonencode(aws_api_gateway_rest_api.rest_api.body))
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
 
-resource "aws_api_gateway_resource" "order_gateway_resource" {
-  rest_api_id = aws_api_gateway_rest_api.rest_api.id
-  parent_id   = aws_api_gateway_rest_api.rest_api.root_resource_id
-  path_part   = "order"
-}
-
-resource "aws_api_gateway_method" "apis_gateway_method" {
+resource "aws_api_gateway_stage" "rest_api" {
+  deployment_id = aws_api_gateway_deployment.rest_api.id
   rest_api_id   = aws_api_gateway_rest_api.rest_api.id
-  resource_id   = aws_api_gateway_resource.order_gateway_resource.id
-  http_method   = "GET"
-  authorization = "NONE"
+  stage_name    = "prod"
 }
 
-resource "aws_api_gateway_integration" "menu_integration" {
+resource "aws_api_gateway_method_settings" "rest_api" {
   rest_api_id = aws_api_gateway_rest_api.rest_api.id
-  resource_id = aws_api_gateway_resource.order_gateway_resource.id
-  http_method = aws_api_gateway_method.apis_gateway_method.http_method
-  type = "HTTP_PROXY"
-  integration_http_method = "GET"
-  uri                     = "http://${aws_lb.alb.dns_name}/api/order"
-  credentials = aws_iam_role.orderingsystem_iam_role_for_ecs.arn
+  stage_name  = aws_api_gateway_stage.rest_api.stage_name
+  method_path = "*/*"
+
+  settings {
+    metrics_enabled = false
+  }
 }
+
+# POLICY
 
 resource "aws_iam_role_policy" "ecs_role_policy" {
   name = "ecs_role_api_gateway_access"
@@ -41,7 +68,7 @@ resource "aws_iam_role_policy" "ecs_role_policy" {
           "execute-api:Invoke"
         ]
         Effect   = "Allow"
-        Resource = "arn:aws:apigateway:${var.regionDefault}:${data.aws_caller_identity.current.account_id}:restapis/*"
+        Resource = "arn:aws:execute-api:us-east-1:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.rest_api.id}/*"
       }
     ]
   })
@@ -55,13 +82,13 @@ resource "aws_api_gateway_rest_api_policy" "api_gateway_policy" {
     Statement = [
       {
         Principal = {
-          "AWS": "*"
+          "AWS" : "*"
         }
         Action = [
           "execute-api:Invoke"
         ]
         Effect   = "Allow"
-        Resource = "arn:aws:apigateway:${var.regionDefault}:${data.aws_caller_identity.current.account_id}:restapis/*"
+        Resource = "arn:aws:execute-api:us-east-1:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.rest_api.id}/*"
       }
     ]
   })

@@ -31,7 +31,7 @@ resource "aws_iam_role_policy" "orderingsystem_role_policy_for_ecs" {
         Action = [
           "sts:AssumeRole"
         ],
-        Effect = "Allow",
+        Effect   = "Allow",
         Resource = "arn:aws:apigateway:${var.regionDefault}:${data.aws_caller_identity.current.account_id}:restapis/*"
       }
     ]
