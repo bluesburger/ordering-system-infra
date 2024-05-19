@@ -8,6 +8,24 @@ resource "aws_lb" "alb" {
 
 }
 
+resource "aws_lb" "nlb" {
+  name               = "NLB-${var.projectName}"
+  internal           = false
+  load_balancer_type = "network"
+  subnets            = ["${data.aws_subnet.existing_subnet1.id}", "${data.aws_subnet.existing_subnet2.id}"]
+}
+
+resource "aws_lb_listener" "alb-listener-default" {
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.tg_order.arn
+  }
+}
+
 resource "aws_lb_listener" "alb-listener-redirect_prod" {
   load_balancer_arn = aws_lb.alb.arn
   port              = "90"
@@ -16,17 +34,6 @@ resource "aws_lb_listener" "alb-listener-redirect_prod" {
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.tg_prod.arn
-  }
-}
-
-resource "aws_lb_listener" "alb-listener-redirect_order" {
-  load_balancer_arn = aws_lb.alb.arn
-  port              = "80"
-  protocol          = "HTTP"
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.tg_order.arn
   }
 }
 
@@ -49,5 +56,61 @@ resource "aws_lb_listener" "alb-listener-redirect_menu" {
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.tg_menu.arn
+  }
+}
+
+resource "aws_lb_listener_rule" "order" {
+  listener_arn = aws_lb_listener.alb-listener-default.arn
+  priority     = 10
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.tg_order.arn
+  }
+  condition {
+    path_pattern {
+      values = ["/order*"]
+    }
+  }
+}
+
+resource "aws_lb_listener_rule" "payment" {
+  listener_arn = aws_lb_listener.alb-listener-default.arn
+  priority     = 20
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.tg_payment.arn
+  }
+  condition {
+    path_pattern {
+      values = ["/payment*"]
+    }
+  }
+}
+
+resource "aws_lb_listener_rule" "menu" {
+  listener_arn = aws_lb_listener.alb-listener-default.arn
+  priority     = 30
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.tg_menu.arn
+  }
+  condition {
+    path_pattern {
+      values = ["/menu*"]
+    }
+  }
+}
+
+resource "aws_lb_listener_rule" "prod" {
+  listener_arn = aws_lb_listener.alb-listener-default.arn
+  priority     = 40
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.tg_prod.arn
+  }
+  condition {
+    path_pattern {
+      values = ["/prod*"]
+    }
   }
 }

@@ -27,6 +27,13 @@ resource "aws_iam_role_policy" "orderingsystem_role_policy_for_ecs" {
         Effect   = "Allow"
         Resource = "arn:aws:ecr:us-east-1:${data.aws_caller_identity.current.account_id}:repository/ordering-system-order"
       },
+      {
+        Action = [
+          "sts:AssumeRole"
+        ],
+        Effect = "Allow",
+        Resource = "arn:aws:apigateway:${var.regionDefault}:${data.aws_caller_identity.current.account_id}:restapis/*"
+      }
     ]
   })
 }
@@ -44,7 +51,8 @@ resource "aws_iam_role" "orderingsystem_iam_role_for_ecs" {
         Principal = {
           Service = [
             "ecs.amazonaws.com",
-            "ecs-tasks.amazonaws.com"
+            "ecs-tasks.amazonaws.com",
+            "apigateway.amazonaws.com"
           ]
         }
       },

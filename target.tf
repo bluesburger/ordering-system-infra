@@ -15,7 +15,7 @@ resource "aws_lb_target_group" "tg_order" {
 
 resource "aws_lb_target_group" "tg_prod" {
   name        = "TG-${var.projectName}-prod"
-  port        = 9090
+  port        = 8080
   protocol    = "HTTP"
   target_type = "ip"
 
@@ -30,7 +30,7 @@ resource "aws_lb_target_group" "tg_prod" {
 
 resource "aws_lb_target_group" "tg_payment" {
   name        = "TG-${var.projectName}-payment"
-  port        = 7070
+  port        = 8080
   protocol    = "HTTP"
   target_type = "ip"
 
@@ -45,7 +45,7 @@ resource "aws_lb_target_group" "tg_payment" {
 
 resource "aws_lb_target_group" "tg_menu" {
   name        = "TG-${var.projectName}-menu"
-  port        = 6060
+  port        = 8080
   protocol    = "HTTP"
   target_type = "ip"
 

@@ -56,3 +56,23 @@ data "aws_db_instance" "database" {
 data "aws_db_instance" "database_menu" {
   db_instance_identifier = var.project_name_menu-rds
 }
+
+data "aws_vpc_endpoint" "vpc_endpoint" {
+  service_name = "com.amazonaws.${var.regionDefault}.execute-api"
+}
+
+data "aws_subnet" "cluster-vpc-subnet-private-1" {
+  tags = {
+    Name = "subnet-private-blues-burger-1"
+  }
+}
+
+data "aws_subnet" "cluster-vpc-subnet-private-2" {
+  tags = {
+    Name = "subnet-private-blues-burger-2"
+  }
+}
+
+data "aws_security_group" "public_subnet_sg" {
+  name = "balancers-security-group"
+}
