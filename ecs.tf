@@ -98,7 +98,7 @@ resource "aws_ecs_service" "service_order" {
   health_check_grace_period_seconds = 240
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.tg.arn
+    target_group_arn = aws_lb_target_group.tg_order.arn
     container_name   = var.project_name_order
     container_port   = 8080
   }

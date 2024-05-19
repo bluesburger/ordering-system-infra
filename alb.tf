@@ -26,7 +26,7 @@ resource "aws_lb_listener" "alb-listener-redirect_order" {
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.tg.arn
+    target_group_arn = aws_lb_target_group.tg_order.arn
   }
 }
 
