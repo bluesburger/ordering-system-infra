@@ -39,7 +39,7 @@ resource "aws_iam_role_policy" "orderingsystem_role_policy_for_ecs" {
 }
 
 resource "aws_iam_role" "orderingsystem_iam_role_for_ecs" {
-  name = "orderingsystem_iam_role_for_ecs"
+  name = "OrderingSystemServiceRoleForECS"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
