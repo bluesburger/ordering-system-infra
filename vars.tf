@@ -79,17 +79,11 @@ variable "aws_region" {
 }
 
 variable "aws_access_key" {
-  description = "Inserir aws access key"
-  type        = string
-  sensitive   = true
-  default     = "AKIAZI2LB6FTXKONVOIL"
+  default = "sua_access_key"
 }
 
 variable "aws_secret_key" {
-  description = "Inserir aws secret key"
-  type        = string
-  sensitive   = true
-  default     = "jv+PZgMCNs/SKwNmgdLxoiMxL8vNIEte24oFj532"
+  default = "sua_secret_key"
 }
 
 variable "domain_name" {
