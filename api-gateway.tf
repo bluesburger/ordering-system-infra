@@ -16,9 +16,8 @@ resource "aws_api_gateway_rest_api" "rest_api" {
           x-amazon-apigateway-integration = {
             httpMethod           = "GET"
             payloadFormatVersion = "1.0"
-            type                 = "aws"
-            #uri                  = "http://${aws_lb.alb.dns_name}/"
-            uri = "arn:aws:execute-api:us-east-1:${data.aws_caller_identity.current.account_id}:*/prod/orders"
+            type                 = "HTTP_PROXY"
+            uri                  = "http://${aws_lb.alb.dns_name}/api/order"
           }
         }
       }
@@ -68,7 +67,7 @@ resource "aws_iam_role_policy" "ecs_role_policy" {
           "execute-api:Invoke"
         ]
         Effect   = "Allow"
-        Resource = "arn:aws:execute-api:us-east-1:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.rest_api.id}/*"
+        Resource = "arn:aws:execute-api:us-east-1:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.rest_api.id}/prod/GET/*"
       }
     ]
   })
@@ -88,7 +87,7 @@ resource "aws_api_gateway_rest_api_policy" "api_gateway_policy" {
           "execute-api:Invoke"
         ]
         Effect   = "Allow"
-        Resource = "arn:aws:execute-api:us-east-1:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.rest_api.id}/*"
+        Resource = "arn:aws:execute-api:us-east-1:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.rest_api.id}/prod/GET/*"
       }
     ]
   })
