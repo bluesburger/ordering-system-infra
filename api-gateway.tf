@@ -11,6 +11,7 @@ resource "aws_api_gateway_rest_api" "rest_api" {
       version = "1.0"
     }
     paths = {
+      // List
       "/orders" = {
         get = {
           x-amazon-apigateway-integration = {
@@ -18,6 +19,17 @@ resource "aws_api_gateway_rest_api" "rest_api" {
             payloadFormatVersion = "1.0"
             type                 = "HTTP_PROXY"
             uri                  = "http://${aws_lb.alb.dns_name}/api/order"
+          }
+        }
+      },
+      // Unit
+      "/orders/{accountId}" = {
+        get = {
+          x-amazon-apigateway-integration = {
+            httpMethod           = "GET"
+            payloadFormatVersion = "1.0"
+            type                 = "HTTP_PROXY"
+            uri                  = "http://${aws_lb.alb.dns_name}/api/order/{accountId}"
           }
         }
       }
@@ -67,7 +79,8 @@ resource "aws_iam_role_policy" "ecs_role_policy" {
           "execute-api:Invoke"
         ]
         Effect   = "Allow"
-        Resource = "arn:aws:execute-api:us-east-1:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.rest_api.id}/prod/GET/*"
+        // Resource = "arn:aws:execute-api:us-east-1:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.rest_api.id}/prod/*"
+        Resource = "*"
       }
     ]
   })
@@ -87,7 +100,8 @@ resource "aws_api_gateway_rest_api_policy" "api_gateway_policy" {
           "execute-api:Invoke"
         ]
         Effect   = "Allow"
-        Resource = "arn:aws:execute-api:us-east-1:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.rest_api.id}/prod/GET/*"
+        // Resource = "arn:aws:execute-api:us-east-1:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.rest_api.id}/prod/*"
+        Resource = "*"
       }
     ]
   })
