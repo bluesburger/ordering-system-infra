@@ -82,12 +82,14 @@ variable "aws_access_key" {
   description = "Inserir aws access key"
   type        = string
   sensitive   = true
+  default     = "AKIAZI2LB6FTXKONVOIL"
 }
 
 variable "aws_secret_key" {
   description = "Inserir aws secret key"
   type        = string
   sensitive   = true
+  default     = "jv+PZgMCNs/SKwNmgdLxoiMxL8vNIEte24oFj532"
 }
 
 variable "domain_name" {
