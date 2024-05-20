@@ -18,7 +18,7 @@ jobs:
   plan-prod:
     name: 'Terraform infra'
     runs-on: ubuntu-latest
-    environment: 'fernando'
+    environment: 'leandro'
     env:
       TF_WORKING_DIR: '.'
 
