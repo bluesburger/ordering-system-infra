@@ -76,8 +76,8 @@ resource "null_resource" "push_image_prod_to_ecr" {
       cd ./temp_repo_prod || exit 1
       git clone https://github.com/bluesburger/orderingsystem-production ./ordering-system-repo-prod
       cd ./ordering-system-repo-prod || exit 1
-      docker build -t ${aws_ecr_repository.repository_prod.repository_url}:production .
-      docker push ${aws_ecr_repository.repository_prod.repository_url}:production
+      docker build -t ${aws_ecr_repository.repository_prod.repository_url}:prod .
+      docker push ${aws_ecr_repository.repository_prod.repository_url}:prod
       rm -rf ./temp_repo_prod
     EOT
     working_dir = path.module
