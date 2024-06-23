@@ -1,5 +1,5 @@
 
- Verifica se o segredo /secret/payment já existe
+# Verifica se o segredo /secret/payment já existe
  data "aws_secretsmanager_secret" "existing_payment_secret" {
    name = "/secret/payment"
  }
