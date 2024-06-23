@@ -1,8 +1,8 @@
 
 # Verifica se o segredo /secret/payment já existe
- data "aws_secretsmanager_secret" "existing_payment_secret" {
-   name = "/secret/payment"
- }
+# data "aws_secretsmanager_secret" "existing_payment_secret" {
+#   name = "/secret/payment"
+# }
 
  resource "aws_secretsmanager_secret" "payment_secret" {
    count      = length(data.aws_secretsmanager_secret.existing_payment_secret) == 0 ? 1 : 0
