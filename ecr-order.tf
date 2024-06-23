@@ -76,8 +76,8 @@ resource "null_resource" "push_image_order_to_ecr" {
       cd ./temp_repo_order || exit 1
       git clone https://github.com/bluesburger/bluesburguer-order ./ordering-system-repo-order
       cd ./ordering-system-repo-order || exit 1
-      docker build -t ${aws_ecr_repository.repository_order.repository_url}:latest .
-      docker push ${aws_ecr_repository.repository_order.repository_url}:latest
+      docker build -t ${aws_ecr_repository.repository_order.repository_url}:order .
+      docker push ${aws_ecr_repository.repository_order.repository_url}:order
       rm -rf ./temp_repo_order
     EOT
     working_dir = path.module
