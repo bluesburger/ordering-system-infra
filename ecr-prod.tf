@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "repository_prod" {
-  name                 = "bb-ordering-system-prod"
+  name                 = "bb-ordering-system-production"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
