@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "repository_prod" {
-  name                 = "bb-ordering-system-production"
+  name                 = "ordering-system-production"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -72,7 +72,7 @@ resource "null_resource" "push_image_prod_to_ecr" {
   provisioner "local-exec" {
     command     = <<-EOT
       aws ecr get-login-password --region ${var.aws_region} | docker login --username AWS --password-stdin ${aws_ecr_repository.repository_prod.repository_url}
-      mkdir -p ./temp_repo_prod  # Cria diretório temporário exclusivo para o pedido
+      mkdir -p ./temp_repo_prod
       cd ./temp_repo_prod || exit 1
       git clone https://github.com/bluesburger/orderingsystem-production ./ordering-system-repo-prod
       cd ./ordering-system-repo-prod || exit 1
