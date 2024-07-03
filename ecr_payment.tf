@@ -76,8 +76,8 @@ resource "null_resource" "push_image_payment_to_ecr" {
       cd ./temp_repo_payment || exit 1
       git clone https://github.com/bluesburger/ordering-system-microservice-payment ./ordering-system-repo
       cd ./ordering-system-repo || exit 1
-      docker build -t ${aws_ecr_repository.repository_payment.repository_url}:payment .
-      docker push ${aws_ecr_repository.repository_payment.repository_url}:payment
+      docker build -t ${aws_ecr_repository.repository_payment.repository_url}:latest .
+      docker push ${aws_ecr_repository.repository_payment.repository_url}:latest
       rm -rf ./temp_repo_payment
     EOT
     working_dir = path.module
