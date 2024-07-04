@@ -232,7 +232,7 @@ resource "aws_ecs_task_definition" "task_production" {
           name = "AWS_ACCOUNT_ID",
           value = "${data.aws_caller_identity.current.account_id}"
         }
-      ],-
+      ],
       logConfiguration = {
         logDriver = "awslogs"
         options = {
