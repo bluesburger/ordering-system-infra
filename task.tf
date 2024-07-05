@@ -285,6 +285,18 @@ resource "aws_ecs_task_definition" "task_stock" {
           value = "${var.aws_secret_key}"
         },
         {
+          name  = "NOTIFICATION_URL"
+          value = "url_test"
+        },
+        {
+          name  = "ORDER_ENDPOINT_HOST",
+          value = "http://${aws_lb.alb.dns_name}"
+        },
+        {
+          name = "AWS_ENDPOINT_URI",
+          value = "https://sqs.us-east-1.amazonaws.com"
+        },
+        {
           name = "AWS_ACCOUNT_ID",
           value = "${data.aws_caller_identity.current.account_id}"
         }
