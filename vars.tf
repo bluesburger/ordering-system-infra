@@ -44,6 +44,12 @@ variable "project_name_menu-rds" {
   type        = string
 }
 
+variable "project_name_stock-rds" {
+  description = "Nome do projeto. Por exemplo, 'bluesburguer'."
+  default     = "rds-dbmenu"
+  type        = string
+}
+
 variable "project_name_order" {
   description = "Nome do projeto. Por exemplo, 'bluesburguer'."
   default     = "blues-burger-order"

@@ -299,6 +299,26 @@ resource "aws_ecs_task_definition" "task_stock" {
         {
           name = "AWS_ACCOUNT_ID",
           value = "${data.aws_caller_identity.current.account_id}"
+        },
+        {
+          name  = "SPRING_DATASOURCE_URL"
+          value = "jdbc:mysql://${data.aws_db_instance.database_menu.endpoint}/dbbluesburgermenu?useSSL=false&useTimezone=true&serverTimezone=UTC"
+        },
+        {
+          name  = "SPRING_DATASOURCE_USERNAME"
+          value = "${var.rdsUser}"
+        },
+        {
+          name  = "SPRING_DATASOURCE_PASSWORD"
+          value = "${var.rdsPass}"
+        },
+        {
+          name  = "SPRING_JPA_GENERATE_DDL"
+          value = "true"
+        },
+        {
+          name  = "SPRING_JPA_HIBERNATE_DDL_AUTO"
+          value = "update"
         }
       ],
       logConfiguration = {
