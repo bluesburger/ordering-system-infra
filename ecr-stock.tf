@@ -73,7 +73,7 @@ resource "null_resource" "push_image_stock_to_ecr" {
   provisioner "local-exec" {
     command     = <<-EOT
       aws ecr get-login-password --region ${var.aws_region} | docker login --username AWS --password-stdin ${aws_ecr_repository.repository_stock.repository_url}
-      mkdir -p ./temp_repo_order
+      mkdir -p ./temp_repo_stock
       cd ./temp_repo_stock || exit 1
       git clone https://github.com/bluesburger/bluesburger-stock ./ordering-system-repo-stock
       cd ./ordering-system-repo-stock || exit 1
