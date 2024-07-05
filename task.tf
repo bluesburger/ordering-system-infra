@@ -274,7 +274,7 @@ resource "aws_ecs_task_definition" "task_stock" {
       environment = [
         {
           name  = "SPRING_PROFILES_ACTIVE"
-          value = "stock"
+          value = "production"
         },
         {
           name  = "AWS_ACCESS_KEY_ID"
