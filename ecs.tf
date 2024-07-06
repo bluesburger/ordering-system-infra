@@ -165,7 +165,7 @@ resource "aws_ecs_service" "service_production" {
 resource "aws_ecs_service" "service_stock" {
   name            = "SVC-${var.project_name_stock}"
   cluster         = aws_ecs_cluster.cluster.arn
-  task_definition = aws_ecs_task_definition.task_production.arn
+  task_definition = aws_ecs_task_definition.task_stock.arn
 
   desired_count                      = 2
   deployment_minimum_healthy_percent = 100
@@ -180,7 +180,7 @@ resource "aws_ecs_service" "service_stock" {
   health_check_grace_period_seconds = 240
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.tg_prod.arn
+    target_group_arn = aws_lb_target_group.tg_stock.arn
     container_name   = var.project_name_stock
     container_port   = 8080
   }
