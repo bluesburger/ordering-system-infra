@@ -59,6 +59,17 @@ resource "aws_lb_listener" "alb-listener-redirect_menu" {
   }
 }
 
+resource "aws_lb_listener" "alb-listener-redirect_stock" {
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "60"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.tg_stock.arn
+  }
+}
+
 resource "aws_lb_listener_rule" "order" {
   listener_arn = aws_lb_listener.alb-listener-default.arn
   priority     = 10
