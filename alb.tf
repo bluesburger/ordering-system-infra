@@ -61,7 +61,7 @@ resource "aws_lb_listener" "alb-listener-redirect_menu" {
 
 resource "aws_lb_listener" "alb-listener-redirect_stock" {
   load_balancer_arn = aws_lb.alb.arn
-  port              = "60"
+  port              = "100"
   protocol          = "HTTP"
 
   default_action {
