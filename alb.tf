@@ -112,19 +112,6 @@ resource "aws_lb_listener_rule" "menu" {
   }
 }
 
-resource "aws_lb_listener_rule" "stock" {
-  listener_arn = aws_lb_listener.alb-listener-default.arn
-  priority     = 50
-  action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.tg_stock.arn
-  }
-  condition {
-    path_pattern {
-      values = ["/stock*"]
-    }
-  }
-}
 
 resource "aws_lb_listener_rule" "prod" {
   listener_arn = aws_lb_listener.alb-listener-default.arn
@@ -136,6 +123,20 @@ resource "aws_lb_listener_rule" "prod" {
   condition {
     path_pattern {
       values = ["/prod*"]
+    }
+  }
+}
+
+resource "aws_lb_listener_rule" "stock" {
+  listener_arn = aws_lb_listener.alb-listener-default.arn
+  priority     = 50
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.tg_stock.arn
+  }
+  condition {
+    path_pattern {
+      values = ["/stock*"]
     }
   }
 }

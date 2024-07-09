@@ -1,14 +1,14 @@
-resource "aws_appautoscaling_target" "autoscaling_target_production" {
+resource "aws_appautoscaling_target" "autoscaling_target_stock" {
   max_capacity       = 2
   min_capacity       = 1
-  resource_id        = "service/${var.clusterName}/${aws_ecs_service.service_production.name}"
+  resource_id        = "service/${var.clusterName}/${aws_ecs_service.service_stock.name}"
   scalable_dimension = "ecs:service:DesiredCount"
   service_namespace  = "ecs"
 
   tags = var.tags
 }
 
-resource "aws_appautoscaling_policy" "memory_policy_production" {
+resource "aws_appautoscaling_policy" "memory_policy_stock" {
   name               = "scaleby-memory"
   policy_type        = "TargetTrackingScaling"
   resource_id        = aws_appautoscaling_target.autoscaling_target_stock.resource_id
@@ -24,7 +24,7 @@ resource "aws_appautoscaling_policy" "memory_policy_production" {
   }
 }
 
-resource "aws_appautoscaling_policy" "cpu_policy_production" {
+resource "aws_appautoscaling_policy" "cpu_policy_stock" {
   name               = "scaleby-cpu"
   policy_type        = "TargetTrackingScaling"
   resource_id        = aws_appautoscaling_target.autoscaling_target_stock.resource_id
