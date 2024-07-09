@@ -129,3 +129,71 @@ resource "aws_sqs_queue_policy" "order_canceled_queue_policy" {
     ]
   })
 }
+
+//SQS for stock
+
+resource "aws_sqs_queue" "stock_canceled_queue" {
+  name                        = "queue-cancel-order-stock-command.fifo"
+  fifo_queue                  = true
+  content_based_deduplication = true
+}
+
+resource "aws_sqs_queue_policy" "stock_canceled_queue_policy" {
+  queue_url = aws_sqs_queue.stock_canceled_queue.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect    = "Allow",
+        Principal = "*",
+        Action    = "sqs:SendMessage",
+        Resource  = aws_sqs_queue.stock_canceled_queue.arn
+      }
+    ]
+  })
+}
+
+resource "aws_sqs_queue" "stock_order_queue" {
+  name                        = "queue-order-stock-command.fifo"
+  fifo_queue                  = true
+  content_based_deduplication = true
+}
+
+resource "aws_sqs_queue_policy" "stock_order_queue_policy" {
+  queue_url = aws_sqs_queue.stock_order_queue.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect    = "Allow",
+        Principal = "*",
+        Action    = "sqs:SendMessage",
+        Resource  = aws_sqs_queue.stock_order_queue.arn
+      }
+    ]
+  })
+}
+
+resource "aws_sqs_queue" "stock_schedule_queue" {
+  name                        = "queue-schedule-order-command.fifo"
+  fifo_queue                  = true
+  content_based_deduplication = true
+}
+
+resource "aws_sqs_queue_policy" "stock_schedule_queue_policy" {
+  queue_url = aws_sqs_queue.stock_schedule_queue.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect    = "Allow",
+        Principal = "*",
+        Action    = "sqs:SendMessage",
+        Resource  = aws_sqs_queue.stock_schedule_queue.arn
+      }
+    ]
+  })
+}
