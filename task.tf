@@ -302,7 +302,7 @@ resource "aws_ecs_task_definition" "task_stock" {
         },
         {
           name  = "SPRING_DATASOURCE_URL"
-          value = "jdbc:mysql://${data.aws_db_instance.database_stock.endpoint}/dbbluesburgermenu?useSSL=false&useTimezone=true&serverTimezone=UTC"
+          value = "jdbc:mysql://${data.aws_db_instance.database_stock.endpoint}/dbbluesburgerstock?useSSL=false&useTimezone=true&serverTimezone=UTC"
         },
         {
           name  = "SPRING_DATASOURCE_USERNAME"
