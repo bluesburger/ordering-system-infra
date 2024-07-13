@@ -66,3 +66,21 @@ resource "aws_ecr_lifecycle_policy" "repository-menu-lifecycle" {
  }
  EOF
 }
+
+resource "null_resource" "push_image_menu_to_ecr" {
+  provisioner "local-exec" {
+    command     = <<-EOT
+      aws ecr get-login-password --region ${var.aws_region} | docker login --username AWS --password-stdin ${aws_ecr_repository.repository_menu.repository_url}
+      mkdir -p ./temp_repo_menu  # Cria diretório temporário exclusivo para o pedido
+      cd ./temp_repo_menu || exit 1
+      git clone https://github.com/bluesburger/ordering-system-microsservice-menu ./ordering-system-repo-menu
+      cd ./ordering-system-repo-menu || exit 1
+      docker build -t ${aws_ecr_repository.repository_menu.repository_url}:latest .
+      docker push ${aws_ecr_repository.repository_menu.repository_url}:latest
+      rm -rf ./temp_repo_menu
+    EOT
+    working_dir = path.module
+  }
+  depends_on = [aws_ecr_repository.repository_menu]
+}
+
