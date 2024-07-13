@@ -35,7 +35,7 @@ resource "aws_ecs_task_definition" "task_menu" {
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          awslogs-group         = "${aws_cloudwatch_log_group.cloudwatch-log-group.name}"
+          awslogs-group         = "${aws_cloudwatch_log_group.cloudwatch-log-group-menu.name}"
           awslogs-region        = "us-east-1"
           awslogs-stream-prefix = "ecs"
         }
@@ -99,7 +99,7 @@ resource "aws_ecs_task_definition" "task_payment" {
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          awslogs-group         = "${aws_cloudwatch_log_group.cloudwatch-log-group.name}"
+          awslogs-group         = "${aws_cloudwatch_log_group.cloudwatch-log-group-payment.name}"
           awslogs-region        = "us-east-1"
           awslogs-stream-prefix = "ecs"
         }
@@ -163,7 +163,7 @@ resource "aws_ecs_task_definition" "task_order" {
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          awslogs-group         = "${aws_cloudwatch_log_group.cloudwatch-log-group.name}"
+          awslogs-group         = "${aws_cloudwatch_log_group.cloudwatch-log-group-order.name}"
           awslogs-region        = "us-east-1"
           awslogs-stream-prefix = "ecs"
         }
@@ -236,7 +236,7 @@ resource "aws_ecs_task_definition" "task_production" {
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          awslogs-group         = "${aws_cloudwatch_log_group.cloudwatch-log-group.name}"
+          awslogs-group         = "${aws_cloudwatch_log_group.cloudwatch-log-group-production.name}"
           awslogs-region        = "us-east-1"
           awslogs-stream-prefix = "ecs"
         }
@@ -324,7 +324,7 @@ resource "aws_ecs_task_definition" "task_stock" {
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          awslogs-group         = "${aws_cloudwatch_log_group.cloudwatch-log-group.name}"
+          awslogs-group         = "${aws_cloudwatch_log_group.cloudwatch-log-group-stock.name}"
           awslogs-region        = "us-east-1"
           awslogs-stream-prefix = "ecs"
         }
