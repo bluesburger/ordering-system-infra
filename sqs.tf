@@ -197,3 +197,47 @@ resource "aws_sqs_queue_policy" "stock_schedule_queue_policy" {
     ]
   })
 }
+
+resource "aws_sqs_queue" "invoice_command_queue" {
+  name                        = "queue-invoice-command.fifo"
+  fifo_queue                  = true
+  content_based_deduplication = true
+}
+
+resource "aws_sqs_queue_policy" "invoice_schedule_queue_policy" {
+  queue_url = aws_sqs_queue.invoice_command_queue.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect    = "Allow",
+        Principal = "*",
+        Action    = "sqs:SendMessage",
+        Resource  = aws_sqs_queue.invoice_command_queue.arn
+      }
+    ]
+  })
+}
+
+resource "aws_sqs_queue" "invoice_cancel_queue" {
+  name                        = "queue-cancel-invoice-command.fifo"
+  fifo_queue                  = true
+  content_based_deduplication = true
+}
+
+resource "aws_sqs_queue_policy" "stock_schedule_queue_policy" {
+  queue_url = aws_sqs_queue.invoice_cancel_queue.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect    = "Allow",
+        Principal = "*",
+        Action    = "sqs:SendMessage",
+        Resource  = aws_sqs_queue.invoice_cancel_queue.arn
+      }
+    ]
+  })
+}
