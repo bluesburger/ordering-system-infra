@@ -70,6 +70,17 @@ resource "aws_lb_listener" "alb-listener-redirect_stock" {
   }
 }
 
+resource "aws_lb_listener" "alb-listener-redirect_invoice" {
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "8025"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.tg_invoice.arn
+  }
+}
+
 resource "aws_lb_listener_rule" "order" {
   listener_arn = aws_lb_listener.alb-listener-default.arn
   priority     = 10
@@ -137,6 +148,20 @@ resource "aws_lb_listener_rule" "stock" {
   condition {
     path_pattern {
       values = ["/stock*"]
+    }
+  }
+}
+
+resource "aws_lb_listener_rule" "invoice" {
+  listener_arn = aws_lb_listener.alb-listener-default.arn
+  priority     = 50
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.tg_invoice.arn
+  }
+  condition {
+    path_pattern {
+      values = ["/invoice*"]
     }
   }
 }

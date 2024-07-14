@@ -63,6 +63,10 @@ data "aws_db_instance" "database_stock" {
   db_instance_identifier = var.project_name_stock-rds
 }
 
+data "aws_db_instance" "database_invoice" {
+  db_instance_identifier = var.project_name_invoice-rds
+}
+
 data "aws_vpc_endpoint" "vpc_endpoint" {
   service_name = "com.amazonaws.${var.regionDefault}.execute-api"
 }

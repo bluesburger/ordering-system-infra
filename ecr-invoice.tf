@@ -1,5 +1,5 @@
-resource "aws_ecr_repository" "repository_prod" {
-  name                 = "ordering-system-production"
+resource "aws_ecr_repository" "repository_invoice" {
+  name                 = "ordering-system-invoice"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -7,11 +7,11 @@ resource "aws_ecr_repository" "repository_prod" {
   }
 
   force_delete = true
-  depends_on = [null_resource.push_image_order_to_ecr]
+  depends_on = [null_resource.push_image_payment_to_ecr]
 }
 
-resource "aws_ecr_repository_policy" "repository-prod-policy" {
-  repository = aws_ecr_repository.repository_prod.name
+resource "aws_ecr_repository_policy" "repository-invoice-policy" {
+  repository = aws_ecr_repository.repository_invoice.name
 
   policy = <<EOF
   {
@@ -45,8 +45,8 @@ resource "aws_ecr_repository_policy" "repository-prod-policy" {
  EOF
 }
 
-resource "aws_ecr_lifecycle_policy" "repository-prod-lifecycle" {
-  repository = aws_ecr_repository.repository_prod.name
+resource "aws_ecr_lifecycle_policy" "repository-invoice-lifecycle" {
+  repository = aws_ecr_repository.repository_invoice.name
 
   policy = <<EOF
  {
@@ -68,20 +68,21 @@ resource "aws_ecr_lifecycle_policy" "repository-prod-lifecycle" {
  EOF
 }
 
-# Definição de um recurso de execução local para fazer o push da imagem "production"
-resource "null_resource" "push_image_prod_to_ecr" {
+
+# Definição de um recurso de execução local para fazer o push da imagem "order"
+resource "null_resource" "push_image_invoice_to_ecr" {
   provisioner "local-exec" {
     command     = <<-EOT
-      aws ecr get-login-password --region ${var.aws_region} | docker login --username AWS --password-stdin ${aws_ecr_repository.repository_prod.repository_url}
-      mkdir -p ./temp_repo_prod
-      cd ./temp_repo_prod || exit 1
-      git clone https://github.com/bluesburger/orderingsystem-production ./ordering-system-repo-prod
-      cd ./ordering-system-repo-prod || exit 1
-      docker build -t ${aws_ecr_repository.repository_prod.repository_url}:latest .
-      docker push ${aws_ecr_repository.repository_prod.repository_url}:latest
-      rm -rf ./temp_repo_prod
+      aws ecr get-login-password --region ${var.aws_region} | docker login --username AWS --password-stdin ${aws_ecr_repository.repository_invoice.repository_url}
+      mkdir -p ./temp_repo_invoice
+      cd ./temp_repo_invoice || exit 1
+      git clone https://github.com/bluesburger/bluesburger-invoice ./ordering-system-repo-invoice
+      cd ./ordering-system-repo-invoice || exit 1
+      docker build -t ${aws_ecr_repository.repository_invoice.repository_url}:latest .
+      docker push ${aws_ecr_repository.repository_invoice.repository_url}:latest
+      rm -rf ./temp_repo_invoice
     EOT
     working_dir = path.module
   }
-  depends_on = [aws_ecr_repository.repository_prod]
+  depends_on = [aws_ecr_repository.repository_invoice]
 }

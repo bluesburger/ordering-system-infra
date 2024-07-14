@@ -7,6 +7,7 @@ resource "aws_ecr_repository" "repository_order" {
   }
 
   force_delete = true
+  depends_on = [null_resource.push_image_menu_to_ecr]
 }
 
 resource "aws_ecr_repository_policy" "repository-order-policy" {

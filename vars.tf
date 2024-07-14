@@ -50,6 +50,12 @@ variable "project_name_stock-rds" {
   type        = string
 }
 
+variable "project_name_invoice-rds" {
+  description = "Nome do projeto. Por exemplo, 'bluesburguer'."
+  default     = "rds-dbinvoice"
+  type        = string
+}
+
 variable "project_name_order" {
   description = "Nome do projeto. Por exemplo, 'bluesburguer'."
   default     = "blues-burger-order"
@@ -71,6 +77,12 @@ variable "project_name_production" {
 variable "project_name_stock" {
   description = "Nome do projeto. Por exemplo, 'bluesburguer'."
   default     = "blues-burger-stock"
+  type        = string
+}
+
+variable "project_name_invoice" {
+  description = "Nome do projeto. Por exemplo, 'bluesburguer'."
+  default     = "blues-burger-invoice"
   type        = string
 }
 

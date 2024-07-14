@@ -28,6 +28,11 @@ resource "aws_cloudwatch_log_group" "cloudwatch-log-group-production" {
   retention_in_days = 1
 }
 
+resource "aws_cloudwatch_log_group" "cloudwatch-log-group-invoice" {
+  name              = "ecs/${var.project_name_invoice}"
+  retention_in_days = 1
+}
+
 resource "aws_cloudwatch_log_stream" "cloudwatch-log-stream" {
   name           = "ecs"
   log_group_name = aws_cloudwatch_log_group.cloudwatch-log-group.name
