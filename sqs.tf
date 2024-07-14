@@ -204,7 +204,7 @@ resource "aws_sqs_queue" "invoice_command_queue" {
   content_based_deduplication = true
 }
 
-resource "aws_sqs_queue_policy" "invoice_schedule_queue_policy" {
+resource "aws_sqs_queue_policy" "invoice_command_queue_policy" {
   queue_url = aws_sqs_queue.invoice_command_queue.id
 
   policy = jsonencode({
@@ -226,7 +226,7 @@ resource "aws_sqs_queue" "invoice_cancel_queue" {
   content_based_deduplication = true
 }
 
-resource "aws_sqs_queue_policy" "stock_schedule_queue_policy" {
+resource "aws_sqs_queue_policy" "invoice_cancel_queue_policy" {
   queue_url = aws_sqs_queue.invoice_cancel_queue.id
 
   policy = jsonencode({
