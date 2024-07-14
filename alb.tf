@@ -154,7 +154,7 @@ resource "aws_lb_listener_rule" "stock" {
 
 resource "aws_lb_listener_rule" "invoice" {
   listener_arn = aws_lb_listener.alb-listener-default.arn
-  priority     = 50
+  priority     = 60
   action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.tg_invoice.arn
