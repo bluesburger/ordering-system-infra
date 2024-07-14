@@ -17,7 +17,7 @@ resource "aws_lb" "nlb" {
 
 resource "aws_lb_listener" "alb-listener-default" {
   load_balancer_arn = aws_lb.alb.arn
-  port              = "80"
+  port              = "8022"
   protocol          = "HTTP"
 
   default_action {
@@ -28,7 +28,7 @@ resource "aws_lb_listener" "alb-listener-default" {
 
 resource "aws_lb_listener" "alb-listener-redirect_prod" {
   load_balancer_arn = aws_lb.alb.arn
-  port              = "90"
+  port              = "8023"
   protocol          = "HTTP"
 
   default_action {
@@ -39,7 +39,7 @@ resource "aws_lb_listener" "alb-listener-redirect_prod" {
 
 resource "aws_lb_listener" "alb-listener-redirect_payment" {
   load_balancer_arn = aws_lb.alb.arn
-  port              = "70"
+  port              = "8021"
   protocol          = "HTTP"
 
   default_action {
@@ -50,7 +50,7 @@ resource "aws_lb_listener" "alb-listener-redirect_payment" {
 
 resource "aws_lb_listener" "alb-listener-redirect_menu" {
   load_balancer_arn = aws_lb.alb.arn
-  port              = "60"
+  port              = "8020"
   protocol          = "HTTP"
 
   default_action {
@@ -61,7 +61,7 @@ resource "aws_lb_listener" "alb-listener-redirect_menu" {
 
 resource "aws_lb_listener" "alb-listener-redirect_stock" {
   load_balancer_arn = aws_lb.alb.arn
-  port              = "100"
+  port              = "8024"
   protocol          = "HTTP"
 
   default_action {
