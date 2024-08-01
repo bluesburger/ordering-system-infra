@@ -1,5 +1,5 @@
 resource "aws_sqs_queue" "order_paid_queue" {
-  name                        = "order-paid.fifo"
+  name                        = "bill-performed-event.fifo"
   fifo_queue                  = true
   content_based_deduplication = true
 }

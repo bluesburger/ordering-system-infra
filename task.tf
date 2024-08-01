@@ -93,7 +93,7 @@ resource "aws_ecs_task_definition" "task_payment" {
         },
         {
           name  = "SQS_PRODUCTION_QUEUE",
-          value = "order-paid.fifo"
+          value = "bill-performed-event.fifo"
         }
       ],
       logConfiguration = {
