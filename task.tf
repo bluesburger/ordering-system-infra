@@ -92,6 +92,10 @@ resource "aws_ecs_task_definition" "task_payment" {
           value = "${var.aws_secret_key}"
         },
         {
+          name  = "AWS_SQS_ENDPOINT_URI"
+          value = "https://sqs.us-east-1.amazonaws.com"
+        },
+        {
           name  = "SQS_PRODUCTION_QUEUE",
           value = "bill-performed-event.fifo"
         }
