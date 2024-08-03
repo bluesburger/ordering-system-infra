@@ -77,7 +77,7 @@ resource "aws_ecs_task_definition" "task_payment" {
       environment = [
         {
           name  = "SPRING_PROFILES_ACTIVE"
-          value = "prod"
+          value = "local"
         },
         {
           name  = "NOTIFICATION_URL"
