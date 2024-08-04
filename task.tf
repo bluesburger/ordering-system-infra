@@ -162,6 +162,22 @@ resource "aws_ecs_task_definition" "task_order" {
         {
           name  = "SPRING_JPA_HIBERNATE_DDL_AUTO"
           value = "update"
+        },
+        {
+          name = "AWS_ENDPOINT_URI",
+          value = "https://sqs.us-east-1.amazonaws.com"
+        },
+        {
+          name = "AWS_ACCOUNT_ID",
+          value = "${data.aws_caller_identity.current.account_id}"
+        },
+        {
+          name  = "AWS_ACCESS_KEY_ID"
+          value = "${var.aws_access_key}"
+        },
+        {
+          name  = "AWS_SECRET_ACCESS_KEY"
+          value = "${var.aws_secret_key}"
         }
       ]
       logConfiguration = {
